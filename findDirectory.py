@@ -11,12 +11,11 @@ if __name__ == "__main__":
     print(os.path.join(sys.argv[1], "0", "1"))
     print(os.path.isfile(os.path.join(sys.argv[1], "0", "1")))
 
-    f = open(os.path.join(sys.argv[1], "5", "123"), 'r', encoding='utf8')
-    readF = f.read()
+    f = open(os.path.join(sys.argv[1], "0", "1"), 'r', encoding='utf8')
 
-    soup = BeautifulSoup(readF, 'html.parser')
+    soup = BeautifulSoup(f, 'lxml')
     print(soup.prettify())
     print("KSAJDKLSADJKLASDJLKAS")
-    for link in soup.find_all('title'):
-        print(link)
+    for tag in soup.find_all(True):
+        print(tag.name)
     # corpus = Corpus(sys.argv[1])
