@@ -20,6 +20,12 @@ if __name__ == "__main__":
     stop_words_path = "stopwords.txt"
     stop_words = open(stop_words_path, 'r', encoding='utf8').read().split('\n')
 
+    ###
+    stop_words_final = []
+    for word in stop_words:
+        stop_words_final.extend(word_tokenize(word))
+    ###
+
     all_tokens_frequency = {}
 
     lemon = WordNetLemmatizer()
@@ -40,6 +46,7 @@ if __name__ == "__main__":
             return ""
 
     f2 = open(os.path.join(sys.argv[1], "74", "495"), 'r', encoding='utf8')
+    f2 = open(os.path.join(sys.argv[1], "0", "2"), 'r', encoding='utf8')
 
     soup = BeautifulSoup(f2, 'lxml')
     tokens = word_tokenize(soup.get_text())
@@ -48,21 +55,21 @@ if __name__ == "__main__":
     print(tagged_tokens)
 
     for word_tag in tagged_tokens:
-        token = word_tag[0]
+        token = word_tag[0].lower()  ###  added lower
         pos = get_wordnet_pos(word_tag[1])
-        if token not in stop_words:
+        if token not in stop_words_final:  ###  stop words final
             if pos != "":
                 lemma = lemon.lemmatize(token, pos)
                 print(token, "---", lemma, "---", pos)
 
-    def computeWordFrequencies(all_tokens_frequency_param):
-        tokenMap = {}
-        for token in tokenList:
-            if (tokenMap.get(token)):
-                tokenMap[token] += 1
-            else:
-                tokenMap[token] = 1
-        return tokenMap
+    # def computeWordFrequencies(all_tokens_frequency_param):
+    #     tokenMap = {}
+    #     for token in tokenList:
+    #         if (tokenMap.get(token)):
+    #             tokenMap[token] += 1
+    #         else:
+    #             tokenMap[token] = 1
+    #     return tokenMap
 
     # print(soup.prettify())
     # print("KSAJDKLSADJKLASDJLKAS")
@@ -88,8 +95,10 @@ if __name__ == "__main__":
 
     # lemon = WordNetLemmatizer()
 
-    # print(lemon.lemmatize("dancing"))
-    # print(lemon.lemmatize("dancing", pos="n"))
+    # print(word_tokenize("about"))
+    # print(lemon.lemmatize("i'd"))
+    # print(lemon.lemmatize("informatics", pos="n"))
+    # print(stop_words_final)
 
     # for folder in range(75):
     #     for file in range(500):
