@@ -18,7 +18,7 @@ nltk.download('wordnet')
 
 def parseElement(parent, folderNum, fileNum):
     docID = folderNum+"/"+fileNum
-    global uniqueWords
+    # global uniqueWords
     for child in parent.contents:
         # print("There is a CHILD Element of " + parent.name)
         # print(type(child))
@@ -29,7 +29,7 @@ def parseElement(parent, folderNum, fileNum):
             # print(tokens)
             # print(tagged_tokens)
             for word_tag in tagged_tokens:
-                token = word_tag[0]
+                token = word_tag[0].lower()
                 pos = get_wordnet_pos(word_tag[1])
                 if token not in stop_words_final and len(token) > 2:
                     if pos != "":
