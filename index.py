@@ -96,11 +96,57 @@ class LinkedList:
         self.head = None
 
 
-def build_index():
-    pass
+def ll_len(ll):
+    length = 0
+    current = ll.head
+    if(current != None):
+        length += 1
+        while(current.next != None):
+            current = current.next
+            length += 1
+    return length
+
+
+def build_index(file_directory, corpus_path):
+    global visitedDocuments
+    # counter = 0
+    for key in file_directory:
+        # if(counter < 20):
+        folder_file_pair = key.split("/")
+        folderNum = folder_file_pair[0]
+        fileNum = folder_file_pair[1]
+        URL = file_directory[key]
+        print("Folder: " + folderNum + "    File: " +
+              fileNum + "   URL: " + URL)
+        f = open(os.path.join(corpus_path, folderNum,
+                              fileNum), 'r', encoding='utf8')
+        soup = BeautifulSoup(f, 'html5lib')
+        parseElement(soup, folderNum, fileNum)
+        visitedDocuments += 1
+        # counter += 1
+        # else:
+        # break
 
 
 def index_size(index_dict):
     size = sys.getsizeof(index_dict)
     print("INDEX SIZE ON DISK: ", size, "bytes")
     return size
+
+
+def index_size_final():
+    size = sys.getsizeof(dictionary)
+    print("INDEX SIZE ON DISK: ", str(size / 1000), "KB")
+    return size / 1000
+
+
+def write_index_to_file(file):
+    for key in dictionary:
+        file.write(key + "\n")
+        current = dictionary[key].head
+        file.write(current.data + "\n")
+        while(current.next != None):
+            current = current.next
+            file.write(current.data + "\n")
+            # print(current.data)
+        file.write("END" + "\n")
