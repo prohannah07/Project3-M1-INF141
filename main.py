@@ -144,4 +144,3 @@ if __name__ == "__main__":
 
     print("Number of Visited Documents: " + str(visitedDocuments))
     print("Number of Unique Words: " + str(uniqueWords))
-
