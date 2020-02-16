@@ -19,3 +19,14 @@ def json_to_dict(corpus_path):
         file_directory = json.load(f)
 
     return file_directory
+
+
+def print_first_20_urls(doc_id_list, file_directory, output_file):
+    count = 0
+    for docID in doc_id_list:
+        if count != 20:
+            print(str(count + 1), file_directory[docID])
+            # output_file.write(str(count + 1) + ": " + file_directory[docID])
+            count += 1
+        else:
+            break

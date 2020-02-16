@@ -3,7 +3,7 @@ import sys
 
 from query import enter_query
 from query import stop_words_size
-from readJSON import json_to_dict
+from corpus import json_to_dict
 
 if __name__ == "__main__":
     print()
