@@ -13,8 +13,18 @@ from nltk.corpus import wordnet
 import nltk
 
 
-# dictionary is index dictionary
-def parseElement(parent, folderNum, fileNum, dictionary):
+stop_words_path = "stopwords.txt"
+stop_words = open(stop_words_path, 'r', encoding='utf8').read().split('\n')
+
+stop_words_final = []
+for word in stop_words:
+    stop_words_final.extend(word_tokenize(word))
+
+lemon = WordNetLemmatizer()
+
+
+def parseElement(parent, folderNum, fileNum):
+    # dictionary is index dictionary
     docID = folderNum + "/" + fileNum
     # global uniqueWords
     for child in parent.contents:
