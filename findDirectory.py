@@ -96,7 +96,7 @@ if __name__ == "__main__":
     # lemon = WordNetLemmatizer()
 
     # print(word_tokenize("about"))
-    # print(lemon.lemmatize("i'd"))
+    print(lemon.lemmatize("i'd run something"))
     # print(lemon.lemmatize("informatics", pos="n"))
     # print(stop_words_final)
 
