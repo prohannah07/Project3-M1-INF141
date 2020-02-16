@@ -31,7 +31,7 @@ def parseElement(parent, folderNum, fileNum):
             for word_tag in tagged_tokens:
                 token = word_tag[0]
                 pos = get_wordnet_pos(word_tag[1])
-                if token not in stop_words and len(token) > 2:
+                if token not in stop_words_final and len(token) > 2:
                     if pos != "":
                         lemma = lemon.lemmatize(token, pos)
                         # print(token, "---", lemma, "---", pos)
@@ -64,21 +64,21 @@ def get_wordnet_pos(treebank_tag):
         return ""
 
 
-# Node class 
-class Node: 
+# Node class
+class Node:
 
-	# Function to initialize the node object 
-	def __init__(self, data): 
-		self.data = data # Assign data 
-		self.next = None # Initialize 
-						# next as null 
+	# Function to initialize the node object
+	def __init__(self, data):
+		self.data = data # Assign data
+		self.next = None # Initialize
+						# next as null
 
-# Linked List class 
-class LinkedList: 
-	
-	# Function to initialize the Linked 
-	# List object 
-	def __init__(self): 
+# Linked List class
+class LinkedList:
+
+	# Function to initialize the Linked
+	# List object
+	def __init__(self):
 		self.head = None
 
 if __name__ == "__main__":
@@ -87,6 +87,10 @@ if __name__ == "__main__":
 
     stop_words_path = "stopwords.txt"
     stop_words = open(stop_words_path, 'r', encoding='utf8').read().split('\n')
+
+    stop_words_final = []
+    for word in stop_words:
+        stop_words_final.extend(word_tokenize(word))
 
     dictionary = {}
     visitedDocuments = 0
@@ -141,4 +145,3 @@ if __name__ == "__main__":
     print("Number of Visited Documents: " + str(visitedDocuments))
     print("Number of Unique Words: " + str(uniqueWords))
 
- 
