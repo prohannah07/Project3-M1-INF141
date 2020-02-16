@@ -13,6 +13,40 @@ from nltk.corpus import wordnet
 import nltk
 
 
+# dictionary is index dictionary
+def parseElement(parent, folderNum, fileNum, dictionary):
+    docID = folderNum + "/" + fileNum
+    # global uniqueWords
+    for child in parent.contents:
+        # print("There is a CHILD Element of " + parent.name)
+        # print(type(child))
+        if(isinstance(child, bs4.element.NavigableString)):
+            # print("This is a string: " + child)
+            tokens = word_tokenize(child)
+            tagged_tokens = pos_tag(tokens)
+            # print(tokens)
+            # print(tagged_tokens)
+            for word_tag in tagged_tokens:
+                token = word_tag[0].lower()
+                pos = get_wordnet_pos(word_tag[1])
+                if token not in stop_words_final and len(token) > 2:
+                    if pos != "":
+                        lemma = lemon.lemmatize(token, pos)
+                        # print(token, "---", lemma, "---", pos)
+                        if lemma in dictionary and dictionary[lemma].head.data != docID:
+                            currentDoc = Node(docID)
+                            currentDoc.next = dictionary[lemma].head
+                            dictionary[lemma].head = currentDoc
+                        elif lemma not in dictionary:
+                            posting = LinkedList()
+                            currentDoc = Node(docID)
+                            posting.head = currentDoc
+                            dictionary[lemma] = posting
+        if(isinstance(child, bs4.element.Tag)):
+            # print("Element Name: " + child.name)
+            parseElement(child, folderNum, fileNum)
+
+
 # Node class
 class Node:
 
