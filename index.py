@@ -1,4 +1,16 @@
+import json
+import re
+import bs4
+import html5lib
+from bs4 import BeautifulSoup
+
+import os
 import sys
+from nltk.stem import WordNetLemmatizer
+from nltk import word_tokenize
+from nltk import pos_tag
+from nltk.corpus import wordnet
+import nltk
 
 
 # Node class
