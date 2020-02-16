@@ -20,6 +20,9 @@ stop_words_final = []
 for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
+dictionary = {}
+visitedDocuments = 0
+uniqueWords = 0
 lemon = WordNetLemmatizer()
 
 
