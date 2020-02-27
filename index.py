@@ -12,7 +12,7 @@ from nltk import pos_tag
 from nltk.corpus import wordnet
 import nltk
 
-
+# Stop Words File
 stop_words_path = "stopwords.txt"
 stop_words = open(stop_words_path, 'r', encoding='utf8').read().split('\n')
 
@@ -20,48 +20,49 @@ stop_words_final = []
 for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
-dictionary = {}
+dictionary = {} # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
 visitedDocuments = 0
 uniqueWords = 0
-lemon = WordNetLemmatizer()
+lemon = WordNetLemmatizer() # nltk lemmatizer
 
 
 def parseElement(parent, folderNum, fileNum):
-    # dictionary is index dictionary
+    # Function takes in a Parent Element and finds the Children Elements
+    # FolderNum and FileNum refer to the file that the function is currently being called on
+    # Initially (before recursion) the Parent Element is the Document Element (aka the entire HTML code)
     docID = folderNum + "/" + fileNum
-    # global uniqueWords
     for child in parent.contents:
         # print("There is a CHILD Element of " + parent.name)
         # print(type(child))
-        if(isinstance(child, bs4.element.NavigableString)):
+        if(isinstance(child, bs4.element.NavigableString)): # If child is string we want to tokenize it. Does not have children.
             # print("This is a string: " + child)
-            tokens = word_tokenize(child)
-            tagged_tokens = pos_tag(tokens)
+            tokens = word_tokenize(child) # Outputs Tokens from the given string
+            tagged_tokens = pos_tag(tokens) # Outputs List<Token,POS>
             # print(tokens)
             # print(tagged_tokens)
-            for word_tag in tagged_tokens:
-                token = word_tag[0].lower()
+            for word_tag in tagged_tokens: # Iterate through (Token, POS) pairs in List
+                token = word_tag[0].lower() # Lowercases Token
                 pos = get_wordnet_pos(word_tag[1])
                 if token not in stop_words_final and len(token) > 2:
                     if pos != "":
-                        lemma = lemon.lemmatize(token, pos)
+                        lemma = lemon.lemmatize(token, pos) # Lemmatizes Token
                         # print(token, "---", lemma, "---", pos)
-                        if lemma in dictionary and dictionary[lemma].head.data != docID:
-                            currentDoc = Node(docID)
-                            currentDoc.next = dictionary[lemma].head
-                            dictionary[lemma].head = currentDoc
-                        elif lemma not in dictionary:
-                            posting = LinkedList()
-                            currentDoc = Node(docID)
-                            posting.head = currentDoc
-                            dictionary[lemma] = posting
-        if(isinstance(child, bs4.element.Tag)):
+                        if lemma in dictionary and dictionary[lemma].head.data != docID: # If Token is in Dictionary AND Posting does not contain current DocID
+                            currentDoc = Node(docID) # Create a new DocID
+                            currentDoc.next = dictionary[lemma].head # Make current DocID NEXT point to -> Posting
+                            dictionary[lemma].head = currentDoc # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                        elif lemma not in dictionary: # If Token is not in Dictionary
+                            posting = LinkedList() # Create a new Posting (LinkedList<DocID>)
+                            currentDoc = Node(docID) # Create a new DocID
+                            posting.head = currentDoc # Point new Posting HEAD -> new  DocID
+                            dictionary[lemma] = posting # Key:Value -> Token:Posting
+        if(isinstance(child, bs4.element.Tag)): # If child is Tag we want to see if it has children
             # print("Element Name: " + child.name)
             parseElement(child, folderNum, fileNum)
 
 
 def get_wordnet_pos(treebank_tag):
-
+    # Function to find part of speech
     if treebank_tag.startswith('J'):
         return wordnet.ADJ
     elif treebank_tag.startswith('V'):
@@ -86,8 +87,6 @@ class Node:
         # next as null
 
 # Linked List class
-
-
 class LinkedList:
 
     # Function to initialize the Linked
@@ -97,6 +96,7 @@ class LinkedList:
 
 
 def ll_len(ll):
+    # Function finds length of LinkedList
     length = 0
     current = ll.head
     if(current != None):
@@ -108,6 +108,8 @@ def ll_len(ll):
 
 
 def build_index(file_directory, corpus_path):
+    # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
+    # Then calls functions to parse HTML Doc and go through its contents
     global visitedDocuments
     # counter = 0
     for key in file_directory:
@@ -120,8 +122,8 @@ def build_index(file_directory, corpus_path):
               fileNum + "   URL: " + URL)
         f = open(os.path.join(corpus_path, folderNum,
                               fileNum), 'r', encoding='utf8')
-        soup = BeautifulSoup(f, 'html5lib')
-        parseElement(soup, folderNum, fileNum)
+        soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
+        parseElement(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
         visitedDocuments += 1
         # counter += 1
         # else:
