@@ -43,6 +43,9 @@ def is_valid(url):
             ##print("URL TOO LONG")
             return False
 
+        elif len(url_path) > 100:
+            return False
+
         else:
             return True
 

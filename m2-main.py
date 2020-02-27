@@ -13,6 +13,17 @@ if __name__ == "__main__":
 
     file_directory = json_to_dict(corpus)
 
-    # print(file_directory["0/273"])
+    # print(is_valid(file_directory["9/98"]))
+    valid_urls = []
 
-    print(is_valid(file_directory["0/117"]))
+    for key in file_directory:
+        if is_valid(file_directory[key]):
+            # print(key + ": " + file_directory[key])
+            valid_urls.append(key)
+
+    print()
+    print()
+    print("UNCHECKED: " + str(len(file_directory)))
+    print("CHECKED: " + str(len(valid_urls)))
+    print("difference: " + str(len(file_directory) - len(valid_urls)))
+    # print(is_valid(file_directory["0/273"]))
