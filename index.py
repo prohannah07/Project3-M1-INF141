@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 import os
 import sys
 from nltk.stem import WordNetLemmatizer
-from nltk import word_tokenize
+# from nltk import word_tokenize
+from tokenizer import word_tokenize
 from nltk import pos_tag
 from nltk.corpus import wordnet
 import nltk
@@ -20,10 +21,10 @@ stop_words_final = []
 for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
-dictionary = {} # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
+dictionary = {}  # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
 visitedDocuments = 0
 uniqueWords = 0
-lemon = WordNetLemmatizer() # nltk lemmatizer
+lemon = WordNetLemmatizer()  # nltk lemmatizer
 
 
 def parseElement(parent, folderNum, fileNum):
@@ -34,29 +35,36 @@ def parseElement(parent, folderNum, fileNum):
     for child in parent.contents:
         # print("There is a CHILD Element of " + parent.name)
         # print(type(child))
-        if(isinstance(child, bs4.element.NavigableString)): # If child is string we want to tokenize it. Does not have children.
+        # If child is string we want to tokenize it. Does not have children.
+        if(isinstance(child, bs4.element.NavigableString)):
             # print("This is a string: " + child)
-            tokens = word_tokenize(child) # Outputs Tokens from the given string
-            tagged_tokens = pos_tag(tokens) # Outputs List<Token,POS>
+            # Outputs Tokens from the given string
+            tokens = word_tokenize(child)
+            tagged_tokens = pos_tag(tokens)  # Outputs List<Token,POS>
             # print(tokens)
             # print(tagged_tokens)
-            for word_tag in tagged_tokens: # Iterate through (Token, POS) pairs in List
-                token = word_tag[0].lower() # Lowercases Token
+            # Iterate through (Token, POS) pairs in List
+            for word_tag in tagged_tokens:
+                token = word_tag[0].lower()  # Lowercases Token
                 pos = get_wordnet_pos(word_tag[1])
                 if token not in stop_words_final and len(token) > 2:
                     if pos != "":
-                        lemma = lemon.lemmatize(token, pos) # Lemmatizes Token
+                        lemma = lemon.lemmatize(token, pos)  # Lemmatizes Token
                         # print(token, "---", lemma, "---", pos)
-                        if lemma in dictionary and dictionary[lemma].head.data != docID: # If Token is in Dictionary AND Posting does not contain current DocID
-                            currentDoc = Node(docID) # Create a new DocID
-                            currentDoc.next = dictionary[lemma].head # Make current DocID NEXT point to -> Posting
-                            dictionary[lemma].head = currentDoc # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
-                        elif lemma not in dictionary: # If Token is not in Dictionary
-                            posting = LinkedList() # Create a new Posting (LinkedList<DocID>)
-                            currentDoc = Node(docID) # Create a new DocID
-                            posting.head = currentDoc # Point new Posting HEAD -> new  DocID
-                            dictionary[lemma] = posting # Key:Value -> Token:Posting
-        if(isinstance(child, bs4.element.Tag)): # If child is Tag we want to see if it has children
+                        # If Token is in Dictionary AND Posting does not contain current DocID
+                        if lemma in dictionary and dictionary[lemma].head.data != docID:
+                            currentDoc = Node(docID)  # Create a new DocID
+                            # Make current DocID NEXT point to -> Posting
+                            currentDoc.next = dictionary[lemma].head
+                            # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                            dictionary[lemma].head = currentDoc
+                        elif lemma not in dictionary:  # If Token is not in Dictionary
+                            posting = LinkedList()  # Create a new Posting (LinkedList<DocID>)
+                            currentDoc = Node(docID)  # Create a new DocID
+                            posting.head = currentDoc  # Point new Posting HEAD -> new  DocID
+                            # Key:Value -> Token:Posting
+                            dictionary[lemma] = posting
+        if(isinstance(child, bs4.element.Tag)):  # If child is Tag we want to see if it has children
             # print("Element Name: " + child.name)
             parseElement(child, folderNum, fileNum)
 
@@ -87,6 +95,8 @@ class Node:
         # next as null
 
 # Linked List class
+
+
 class LinkedList:
 
     # Function to initialize the Linked
@@ -122,8 +132,9 @@ def build_index(file_directory, corpus_path):
               fileNum + "   URL: " + URL)
         f = open(os.path.join(corpus_path, folderNum,
                               fileNum), 'r', encoding='utf8')
-        soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
-        parseElement(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
+        soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+        # A Recursive Function that goes through HTML Document Tags and Text
+        parseElement(soup, folderNum, fileNum)
         visitedDocuments += 1
         # counter += 1
         # else:
