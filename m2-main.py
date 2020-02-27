@@ -15,4 +15,4 @@ if __name__ == "__main__":
 
     # print(file_directory["0/273"])
 
-    print(is_valid(file_directory["0/273"]))
+    print(is_valid(file_directory["0/117"]))

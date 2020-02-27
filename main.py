@@ -27,27 +27,27 @@ if __name__ == "__main__":
     print("# VISITED DOCUMENTS: " + str(index.visitedDocuments))
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
 
-    inf_q = 'informatics_q.txt'
-    mondego_q = 'mondego_q.txt'
-    irvine_q = 'irvine_q.txt'
+    # inf_q = 'informatics_q.txt'
+    # mondego_q = 'mondego_q.txt'
+    # irvine_q = 'irvine_q.txt'
 
-    inf = open(inf_q, 'w')
-    mon = open(mondego_q, 'w')
-    irv = open(irvine_q, 'w')
+    # inf = open(inf_q, 'w')
+    # mon = open(mondego_q, 'w')
+    # irv = open(irvine_q, 'w')
 
-    inf_query = enter_query()
-    print_first_20_urls(
-        inf_query, index.dictionary[inf_query], file_directory, inf)
+    # inf_query = enter_query()
+    # print_first_20_urls(
+    #     inf_query, index.dictionary[inf_query], file_directory, inf)
 
-    mon_query = enter_query()
-    print_first_20_urls(
-        mon_query, index.dictionary[mon_query], file_directory, mon)
+    # mon_query = enter_query()
+    # print_first_20_urls(
+    #     mon_query, index.dictionary[mon_query], file_directory, mon)
 
-    irv_query = enter_query()
-    print_first_20_urls(
-        irv_query, index.dictionary[irv_query], file_directory, irv)
+    # irv_query = enter_query()
+    # print_first_20_urls(
+    #     irv_query, index.dictionary[irv_query], file_directory, irv)
 
-    i.close()
-    inf.close()
-    mon.close()
-    irv.close()
+    # i.close()
+    # inf.close()
+    # mon.close()
+    # irv.close()

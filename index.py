@@ -12,6 +12,8 @@ from nltk import pos_tag
 from nltk.corpus import wordnet
 import nltk
 
+from crawler import is_valid
+
 # Stop Words File
 stop_words_path = "stopwords.txt"
 stop_words = open(stop_words_path, 'r', encoding='utf8').read().split('\n')
@@ -111,23 +113,25 @@ def build_index(file_directory, corpus_path):
     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
     # Then calls functions to parse HTML Doc and go through its contents
     global visitedDocuments
-    # counter = 0
+    counter = 0
     for key in file_directory:
-        # if(counter < 20):
-        folder_file_pair = key.split("/")
-        folderNum = folder_file_pair[0]
-        fileNum = folder_file_pair[1]
-        URL = file_directory[key]
-        print("Folder: " + folderNum + "    File: " +
-              fileNum + "   URL: " + URL)
-        f = open(os.path.join(corpus_path, folderNum,
-                              fileNum), 'r', encoding='utf8')
-        soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
-        parseElement(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
-        visitedDocuments += 1
-        # counter += 1
-        # else:
-        # break
+        if(counter < 20):
+            folder_file_pair = key.split("/")
+            folderNum = folder_file_pair[0]
+            fileNum = folder_file_pair[1]
+            URL = file_directory[key]
+            if( is_valid(URL) ):
+                ##print("Folder: " + folderNum + "    File: " + fileNum + "   URL: " + URL)
+                f = open(os.path.join(corpus_path, folderNum,
+                                    fileNum), 'r', encoding='utf8')
+                soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
+                parseElement(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
+                visitedDocuments += 1
+                counter += 1
+            # else:
+            #     print("NOT VALID - Folder: " + folderNum + "    File: " + fileNum + "   URL: " + URL)
+        else:
+            break
 
 
 def index_size(index_dict):
