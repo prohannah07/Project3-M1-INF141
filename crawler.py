@@ -31,19 +31,16 @@ def is_valid(url):
         if ".ics.uci.edu" not in parsed.hostname or parsed.fragment != "" or re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" + "|thmx|mso|arff|rtf|jar|csv" + "|sql|java|prefs|class|h|cc|cpp|svn" + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", url_path) or ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path) or re.match("^.*timeline.*$", url_path) or re.match("^.*action=diff.*$", parsed.query))) or re.match("^.*img.*$", url_path):
             # removed |txt|htm|
             # self.trap_links_file.write(url + "\n")
-            ##print("BAD FILE TYPE")
+            print("BAD FILE TYPE")
             return False
 
         elif re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", url_path) or ("calendar" not in parsed.hostname and re.match("^.*calendar.*$", url_path)):
             # self.trap_links_file.write(url + "\n")
-            ##print("REPEATING SUB-DIRECTORY")
+            print("REPEATING SUB-DIRECTORY")
             return False
 
         elif len(url_path) > 285:
-            ##print("URL TOO LONG")
-            return False
-
-        elif len(url_path) > 100:
+            print("URL TOO LONG")
             return False
 
         else:

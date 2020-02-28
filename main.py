@@ -21,10 +21,12 @@ if __name__ == "__main__":
     i = open(index_file, 'w')
 
     index.build_index(file_directory, corpus)
+    ###index.build_test(file_directory, corpus)
     # i.write("hello world")
     index.write_index_to_file(i)
     # print(index.dictionary)
     print("# VISITED DOCUMENTS: " + str(index.visitedDocuments))
+    print("# INVALID DOCUMENTS: " + str(index.invalidDocuments))
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
 
     # inf_q = 'informatics_q.txt'
