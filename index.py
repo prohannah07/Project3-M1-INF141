@@ -121,24 +121,24 @@ def build_index(file_directory, corpus_path):
     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
     # Then calls functions to parse HTML Doc and go through its contents
     global visitedDocuments
-    # counter = 0
+    counter = 0
     for key in file_directory:
-        # if(counter < 20):
-        folder_file_pair = key.split("/")
-        folderNum = folder_file_pair[0]
-        fileNum = folder_file_pair[1]
-        URL = file_directory[key]
-        print("Folder: " + folderNum + "    File: " +
-              fileNum + "   URL: " + URL)
-        f = open(os.path.join(corpus_path, folderNum,
-                              fileNum), 'r', encoding='utf8')
-        soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
-        # A Recursive Function that goes through HTML Document Tags and Text
-        parseElement(soup, folderNum, fileNum)
-        visitedDocuments += 1
-        # counter += 1
-        # else:
-        # break
+        if(counter < 20):
+            folder_file_pair = key.split("/")
+            folderNum = folder_file_pair[0]
+            fileNum = folder_file_pair[1]
+            URL = file_directory[key]
+            print("Folder: " + folderNum + "    File: " +
+                  fileNum + "   URL: " + URL)
+            f = open(os.path.join(corpus_path, folderNum,
+                                  fileNum), 'r', encoding='utf8')
+            soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+            # A Recursive Function that goes through HTML Document Tags and Text
+            parseElement(soup, folderNum, fileNum)
+            visitedDocuments += 1
+            counter += 1
+        else:
+            break
 
 
 def index_size(index_dict):
@@ -163,3 +163,31 @@ def write_index_to_file(file):
             file.write(current.data + "\n")
             # print(current.data)
         file.write("END" + "\n")
+
+
+def ll_make_list(ll):
+    # Function finds length of LinkedList
+    ll_list = []
+    # length = 0
+    current = ll.head
+    if(current != None):
+        # length += 1
+        ll_list.append(current.data)
+        while(current.next != None):
+            current = current.next
+            ll_list.append(current.data)
+            # length += 1
+    # return length
+    return ll_list
+
+
+def dict_posting_to_list():
+    new_dict = {}
+    for token in dictionary:
+        new_dict[token] = ll_make_list(dictionary[token])
+    return new_dict
+
+
+def write_index_to_json_file(file):
+    with open(file, 'w') as outfile:
+        json.dump(dict_posting_to_list(), outfile, indent=4)

@@ -20,9 +20,15 @@ if __name__ == "__main__":
     index_file = 'index.txt'
     i = open(index_file, 'w')
 
+    index_json_file = 'index.json'
+    ij = open(index_json_file, 'w')
+
     index.build_index(file_directory, corpus)
     # i.write("hello world")
     index.write_index_to_file(i)
+    print(index.ll_make_list(index.dictionary["have"]))
+    print(index.dict_posting_to_list())
+    index.write_index_to_json_file(index_json_file)
     # print(index.dictionary)
     print("# VISITED DOCUMENTS: " + str(index.visitedDocuments))
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
@@ -35,17 +41,17 @@ if __name__ == "__main__":
     mon = open(mondego_q, 'w')
     irv = open(irvine_q, 'w')
 
-    inf_query = enter_query()
-    print_first_20_urls(
-        inf_query, index.dictionary[inf_query], file_directory, inf)
+    # inf_query = enter_query()
+    # print_first_20_urls(
+    #     inf_query, index.dictionary[inf_query], file_directory, inf)
 
-    mon_query = enter_query()
-    print_first_20_urls(
-        mon_query, index.dictionary[mon_query], file_directory, mon)
+    # mon_query = enter_query()
+    # print_first_20_urls(
+    #     mon_query, index.dictionary[mon_query], file_directory, mon)
 
-    irv_query = enter_query()
-    print_first_20_urls(
-        irv_query, index.dictionary[irv_query], file_directory, irv)
+    # irv_query = enter_query()
+    # print_first_20_urls(
+    #     irv_query, index.dictionary[irv_query], file_directory, irv)
 
     i.close()
     inf.close()
