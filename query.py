@@ -2,7 +2,8 @@ import os
 import sys
 from bs4 import BeautifulSoup
 from nltk.stem import WordNetLemmatizer
-from nltk import word_tokenize
+#from nltk import word_tokenize
+from tokenizer import word_tokenize
 from nltk import pos_tag
 from nltk.corpus import wordnet
 
@@ -33,22 +34,29 @@ def get_wordnet_pos(treebank_tag):
 
 
 def lemmatize_query(query, lemmatizer):
+    query_tokens = {}
     token = word_tokenize(query)
     tagged = pos_tag(token)
-    tokenized_query = tagged[0][0].lower()
-    pos = get_wordnet_pos(tagged[0][1])
-    if tokenized_query not in stop_words_final:
-        if pos != "":
-            lemma = lemmatizer.lemmatize(tokenized_query, pos)
-            return lemma
+    for word_tag in tagged:
+        token = word_tag[0].lower()  # Lowercases Token
+        pos = get_wordnet_pos(word_tag[1])
+        if token not in stop_words_final and len(token) > 2:
+            if pos != "":
+                lemma = lemmatizer.lemmatize(token, pos)  # Lemmatizes Token
+                if lemma not in query_tokens:
+                    # print("Added Token: " + lemma)
+                    query_tokens[lemma] = 1
+                else:
+                    # print("Plus one frequency for: " + lemma)
+                    query_tokens[lemma] = query_tokens[lemma] + 1
+    return query_tokens
 
 
 def enter_query():
     print("Enter your query: ")
     q = str(input())
-    lem_q = lemmatize_query(q, lemon)
-    print("TOKENIZED AND LEMMATIZED QUERY: ", lem_q)
-    return lem_q
+    lem_query = lemmatize_query(q, lemon)
+    return lem_query
 
 
 def stop_words_size():

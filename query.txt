@@ -1,0 +1,9 @@
+NUMBER OF URLs RETRIEVED: 7
+FIRST 20 URLs:
+1	docID: 0/1	score: 0.2520852748683048	URL: www.ics.uci.edu/~ejw/pres/stc-99/sld009.htm
+2	docID: 0/115	score: 0.009548827974555687	URL: www.ics.uci.edu/alumni/mentor/hall_of_fame/hall_of_fame/stayconnected/hall_of_fame/stayconnected/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/stayconnected/hall_of_fame/inductees.aspx.php
+3	docID: 0/112	score: 0.005264167332142233	URL: cgvw.ics.uci.edu/the-future-of-research-in-computer-games-and-virtual-worlds
+4	docID: 0/110	score: 0.007940191239369431	URL: www.ics.uci.edu/~mlearn/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/Human+Activity+Recognition+Using+Smartphones
+5	docID: 0/108	score: 0.009448720567573588	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
+6	docID: 0/103	score: 0.007402549570144228	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
+7	docID: 0/101	score: 0.021342886851970767	URL: cbcl.ics.uci.edu/doku.php/software/arem?do=login&sectok=dd041326677606876341a676d7ce3884

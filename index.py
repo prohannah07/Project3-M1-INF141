@@ -25,6 +25,7 @@ for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
 dictionary = {}  # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
+reference = {} # Key:Value -> DocId:List<Token>
 tagWeightDict = {"title": 5,"h1": 4, "h2": 3, "h3": 2, "strong": 1}
 excludedParentTags = set(["script","style","head"])
 visitedDocuments = 0
@@ -38,6 +39,7 @@ def parse_element(parent, folderNum, fileNum):
     # FolderNum and FileNum refer to the file that the function is currently being called on
     # Initially (before recursion) the Parent Element is the Document Element (aka the entire HTML code)
     global excludedParentTags
+    # global reference
     docID = folderNum + "/" + fileNum
     for child in parent.contents:
         # If child is string we want to tokenize it. Does not have children.
@@ -56,6 +58,10 @@ def parse_element(parent, folderNum, fileNum):
                 if token not in stop_words_final and len(token) > 2:
                     if pos != "":
                         lemma = lemon.lemmatize(token, pos)  # Lemmatizes Token
+                        if docID not in reference:
+                            reference[docID] = {lemma: {"weight":0} }
+                        else:
+                            reference[docID][lemma] = {"weight":0}
                         if lemma in dictionary and dictionary[lemma].head.docID != docID: # If Token is in Dictionary AND Posting does not contain current DocID
                             posting = dictionary[lemma]
                             currentDoc = Node(docID)  # Create a new DocID
@@ -148,7 +154,7 @@ def build_index(file_directory, corpus_path):
     global invalidDocuments
     counter = 0
     for key in file_directory:
-        if(counter < 50):
+        if(counter < 20):
             folder_file_pair = key.split("/")
             folderNum = folder_file_pair[0]
             fileNum = folder_file_pair[1]
@@ -206,19 +212,35 @@ def index_size_final():
     return size / 1000
 
 
-def write_index_to_file(file):
+def write_reference_to_file(file):
+    for docID in reference:
+        file.write(docID)
+        for token in reference[docID]:
+            file.write("|" + token)
+            file.write(";" + str(reference[docID][token]["weight"]))
+        file.write("\n")
+
+def write_index_to_file(file,file2):
     global visitedDocuments
     total_documents = visitedDocuments
     for key in dictionary:
         posting = dictionary[key]
         current = dictionary[key].head
         file.write(key)
+        file2.write(key)
+        file2.write("|" + str(posting.len))
         posting.idf = compute_inverse_document_frequency(key,dictionary[key],total_documents)
         current.tf_idf = compute_tf_idf(current.tf,posting.idf)
         file.write("    Inverse Document Frequency: " + str(posting.idf) + "\n")
+        file2.write("|" + str(posting.idf))
         file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "    Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
+        file2.write("|" + current.docID + ";" + str(current.tf_idf))
+        reference[current.docID][key]["weight"] = current.tf_idf
         while(current.next != None):
             current = current.next
             current.tf_idf = compute_tf_idf(current.tf,posting.idf)
             file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
+            file2.write("|" + current.docID + ";" + str(current.tf_idf))
+            reference[current.docID][key]["weight"] = current.tf_idf
         file.write("END" + "\n")
+        file2.write("\n")
