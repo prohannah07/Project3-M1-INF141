@@ -12,6 +12,7 @@ from tokenizer import word_tokenize
 from nltk import pos_tag
 from nltk.corpus import wordnet
 import nltk
+from math import log10
 
 from crawler import is_valid
 
@@ -56,19 +57,23 @@ def parse_element(parent, folderNum, fileNum):
                     if pos != "":
                         lemma = lemon.lemmatize(token, pos)  # Lemmatizes Token
                         if lemma in dictionary and dictionary[lemma].head.docID != docID: # If Token is in Dictionary AND Posting does not contain current DocID
+                            posting = dictionary[lemma]
                             currentDoc = Node(docID)  # Create a new DocID
                             check_tag_weight(parent.name,currentDoc)
-                            currentDoc.next = dictionary[lemma].head # Make current DocID NEXT point to -> Posting
-                            dictionary[lemma].head = currentDoc # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                            currentDoc.next = posting.head # Make current DocID NEXT point to -> Posting
+                            posting.head = currentDoc # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                            posting.len += 1
                         elif lemma in dictionary: # If Token is in Dictionary AND Posting does contain current DocID
                             currentDoc = dictionary[lemma].head
                             check_tag_weight(parent.name,currentDoc)
-                            currentDoc.freq += 1
+                            currentDoc.count += 1
+                            currentDoc.tf = compute_weighted_term_frequency(currentDoc.count)
                         elif lemma not in dictionary:  # If Token is not in Dictionary
                             posting = LinkedList()  # Create a new Posting (LinkedList<DocID>)
                             currentDoc = Node(docID)  # Create a new DocID
                             check_tag_weight(parent.name,currentDoc)
                             posting.head = currentDoc  # Point new Posting HEAD -> new  DocID
+                            posting.len += 1
                             dictionary[lemma] = posting # Key:Value -> Token:Posting
         if(isinstance(child, bs4.element.Tag)):  # If child is Tag we want to see if it has children
             # print("Element Name: " + child.name)
@@ -103,9 +108,11 @@ class Node:
     # Function to initialize the node object
     def __init__(self, docID):
         self.docID = docID  # Assign data
-        self.freq = 1
+        self.count = 1
         self.tagWeight = 0
         self.priorityTag = "None"
+        self.tf = compute_weighted_term_frequency(self.count)
+        self.tf_idf = 0
         self.next = None  # Initialize
         # next as null
 
@@ -118,6 +125,8 @@ class LinkedList:
     # List object
     def __init__(self):
         self.head = None
+        self.idf = 0
+        self.len = 0
 
 
 def ll_len(ll):
@@ -169,6 +178,22 @@ def build_test(file_directory, corpus_path):
     parse_element(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
     visitedDocuments += 1
 
+
+def compute_inverse_document_frequency(token, posting, total_documents):
+    idf = log10(total_documents/posting.len)
+    return idf
+
+
+def compute_weighted_term_frequency(count):
+    tf = 1 + log10(count)
+    return tf
+
+
+def compute_tf_idf(term_frequency, inverse_document_frequency):
+    tf_idf = term_frequency * inverse_document_frequency
+    return tf_idf
+
+
 def index_size(index_dict):
     size = sys.getsizeof(index_dict)
     print("INDEX SIZE ON DISK: ", size, "bytes")
@@ -182,12 +207,18 @@ def index_size_final():
 
 
 def write_index_to_file(file):
+    global visitedDocuments
+    total_documents = visitedDocuments
     for key in dictionary:
-        file.write(key + "\n")
+        posting = dictionary[key]
         current = dictionary[key].head
-        file.write("DocID: " + current.docID + "  Freq: " + str(current.freq) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "\n")
+        file.write(key)
+        posting.idf = compute_inverse_document_frequency(key,dictionary[key],total_documents)
+        current.tf_idf = compute_tf_idf(current.tf,posting.idf)
+        file.write("    Inverse Document Frequency: " + str(posting.idf) + "\n")
+        file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "    Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
         while(current.next != None):
             current = current.next
-            file.write("DocID: " + current.docID + "  Freq: " + str(current.freq) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "\n")
-            # print(current.data)
+            current.tf_idf = compute_tf_idf(current.tf,posting.idf)
+            file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
         file.write("END" + "\n")
