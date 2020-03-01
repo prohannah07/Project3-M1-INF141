@@ -29,8 +29,8 @@ if __name__ == "__main__":
     reference_file = 'Document_Reference.txt'
     ref = open(reference_file,'w')
 
-    # index.build_index(file_directory, corpus)
-    index.build_test(file_directory, corpus)
+    index.build_index(file_directory, corpus)
+    # index.build_test(file_directory, corpus)
 
     index.write_index_to_file(i,j)
     i.close()
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     index.write_reference_to_file(ref)
     ref.close()
-    
+
     print("# VISITED DOCUMENTS: " + str(index.visitedDocuments))
     print("# INVALID DOCUMENTS: " + str(index.invalidDocuments))
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
