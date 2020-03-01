@@ -157,64 +157,64 @@ def ll_len(ll):
     return length
 
 
-def build_index(file_directory, corpus_path):
-    # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
-    # Then calls functions to parse HTML Doc and go through its contents
-    global visitedDocuments
-    global invalidDocuments
-    counter = 0
-    for key in file_directory:
-        if(counter < 100):
-            folder_file_pair = key.split("/")
-            folderNum = folder_file_pair[0]
-            fileNum = folder_file_pair[1]
-            URL = file_directory[key]
-            if(is_valid(URL)):
-                print("Folder: " + folderNum + "    File: " +
-                      fileNum + "   URL: " + URL)
-                f = open(os.path.join(corpus_path, folderNum,
-                                      fileNum), 'r', encoding='utf8')
-                # Parse Current HTML Document
-                soup = BeautifulSoup(f, 'html5lib')
-                # A Recursive Function that goes through HTML Document Tags and Text
-                parse_element(soup, folderNum, fileNum)
-                visitedDocuments += 1
-                counter += 1
-            else:
-                print("NOT VALID - Folder: " + folderNum +
-                      "    File: " + fileNum + "   URL: " + URL)
-                invalidDocuments += 1
-        else:
-            break
-
 # def build_index(file_directory, corpus_path):
 #     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
 #     # Then calls functions to parse HTML Doc and go through its contents
 #     global visitedDocuments
 #     global invalidDocuments
-#     # counter = 0
+#     counter = 0
 #     for key in file_directory:
-#         # if(counter < 20):
-#         folder_file_pair = key.split("/")
-#         folderNum = folder_file_pair[0]
-#         fileNum = folder_file_pair[1]
-#         URL = file_directory[key]
-#         if(is_valid(URL)):
-#             print("Folder: " + folderNum + "    File: " +
-#                   fileNum + "   URL: " + URL)
-#             f = open(os.path.join(corpus_path, folderNum,
-#                                   fileNum), 'r', encoding='utf8')
-#             soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
-#             # A Recursive Function that goes through HTML Document Tags and Text
-#             parse_element(soup, folderNum, fileNum)
-#             visitedDocuments += 1
-#             # counter += 1
+#         if(counter < 100):
+#             folder_file_pair = key.split("/")
+#             folderNum = folder_file_pair[0]
+#             fileNum = folder_file_pair[1]
+#             URL = file_directory[key]
+#             if(is_valid(URL)):
+#                 print("Folder: " + folderNum + "    File: " +
+#                       fileNum + "   URL: " + URL)
+#                 f = open(os.path.join(corpus_path, folderNum,
+#                                       fileNum), 'r', encoding='utf8')
+#                 # Parse Current HTML Document
+#                 soup = BeautifulSoup(f, 'html5lib')
+#                 # A Recursive Function that goes through HTML Document Tags and Text
+#                 parse_element(soup, folderNum, fileNum)
+#                 visitedDocuments += 1
+#                 counter += 1
+#             else:
+#                 print("NOT VALID - Folder: " + folderNum +
+#                       "    File: " + fileNum + "   URL: " + URL)
+#                 invalidDocuments += 1
 #         else:
-#             print("NOT VALID - Folder: " + folderNum +
-#                   "    File: " + fileNum + "   URL: " + URL)
-#             invalidDocuments += 1
-#         # else:
-#         #     break
+#             break
+
+def build_index(file_directory, corpus_path):
+    # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
+    # Then calls functions to parse HTML Doc and go through its contents
+    global visitedDocuments
+    global invalidDocuments
+    # counter = 0
+    for key in file_directory:
+        # if(counter < 20):
+        folder_file_pair = key.split("/")
+        folderNum = folder_file_pair[0]
+        fileNum = folder_file_pair[1]
+        URL = file_directory[key]
+        if(is_valid(URL)):
+            print("Folder: " + folderNum + "    File: " +
+                  fileNum + "   URL: " + URL)
+            f = open(os.path.join(corpus_path, folderNum,
+                                  fileNum), 'r', encoding='utf8')
+            soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+            # A Recursive Function that goes through HTML Document Tags and Text
+            parse_element(soup, folderNum, fileNum)
+            visitedDocuments += 1
+            # counter += 1
+        else:
+            print("NOT VALID - Folder: " + folderNum +
+                  "    File: " + fileNum + "   URL: " + URL)
+            invalidDocuments += 1
+        # else:
+        #     break
 
 
 def build_test(file_directory, corpus_path):
@@ -268,8 +268,9 @@ def index_size_final():
 def write_reference_to_file(file):
     for docID in reference:
         file.write(docID)
-        file.write( "|" + str(reference[docID]))
+        file.write("|" + str(reference[docID]))
         file.write("\n")
+
 
 def write_index_to_file(file, file2):
     global visitedDocuments
@@ -282,7 +283,8 @@ def write_index_to_file(file, file2):
         file2.write("|" + str(posting.len))
         posting.idf = compute_inverse_document_frequency(
             key, dictionary[key], total_documents)
-        current.tf_idf = compute_tf_idf(current.tf, posting.idf, current.tagWeight)
+        current.tf_idf = compute_tf_idf(
+            current.tf, posting.idf, current.tagWeight)
         file.write("    Inverse Document Frequency: " +
                    str(posting.idf) + "\n")
         file2.write("|" + str(posting.idf))
@@ -292,7 +294,8 @@ def write_index_to_file(file, file2):
         # reference[current.docID][key]["weight"] = current.tf_idf
         while(current.next != None):
             current = current.next
-            current.tf_idf = compute_tf_idf(current.tf, posting.idf, current.tagWeight)
+            current.tf_idf = compute_tf_idf(
+                current.tf, posting.idf, current.tagWeight)
             file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag +
                        "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
             file2.write("|" + current.docID + ";" + str(current.tf_idf))
