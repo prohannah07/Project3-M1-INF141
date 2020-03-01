@@ -24,15 +24,15 @@ if __name__ == "__main__":
     i = open(index_file, 'w')
 
     index_file = 'PIndex.txt'
-    j = open(index_file,'w')
+    j = open(index_file, 'w')
 
     reference_file = 'Document_Reference.txt'
-    ref = open(reference_file,'w')
+    ref = open(reference_file, 'w')
 
     index.build_index(file_directory, corpus)
     # index.build_test(file_directory, corpus)
 
-    index.write_index_to_file(i,j)
+    index.write_index_to_file(i, j)
     i.close()
     j.close()
 
@@ -44,25 +44,26 @@ if __name__ == "__main__":
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
 
     q = 'query.txt'
-    q_file =  open(q, 'w')
+    q_file = open(q, 'w')
     while(True):
 
-        query = enter_query() # Dictionary returned Token:Frequency
+        query = enter_query()  # Dictionary returned Token:Frequency
         query_terms = {"length_norm": 0}
         query_search = {}
-        ## dict.clear()
+        # dict.clear()
         for token in query:
-            index = open(index_file,'r')
+            index = open(index_file, 'r')
             #ref = open(reference_file,'r')
             print("TOKENIZED AND LEMMATIZED QUERY: ", token)
-            retrieve_corpus_data(token, query[token], query_terms, query_search, index)
+            retrieve_corpus_data(
+                token, query[token], query_terms, query_search, index)
             index.close()
-        normalize_terms(query_terms,query_search,reference_file)
+        normalize_terms(query_terms, query_search, reference_file)
         # print("Query Terms")
         # print(query_terms)
         # print("Query Search")
         # print(query_search)
         print("Retrieved URLs")
-        print_ranked_results(query_search,file_directory,q_file)
+        print_ranked_results(query_search, file_directory, q_file)
 
     q_file.close()

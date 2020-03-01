@@ -4,9 +4,17 @@ import json
 import os
 from bs4 import BeautifulSoup
 
+from query import lemon_query
+from corpus import print_ranked_results
+from corpus import retrieve_corpus_data
+from corpus import normalize_terms
+from corpus import compute_score
+import index
+
 corpus_path = ""
-index = {}
+# index = {}
 file_directory = {}
+retrieved_docIDs = []
 
 
 def json_to_dict():
@@ -25,22 +33,51 @@ def index_to_dict(index_path):
 
 
 def handle_query(entry, no_match_label):
+    global retrieved_docIDs
+
     query = entry.get().lower()
+    lemonized_query = lemon_query(query)
+
+    query_terms = {"length_norm": 0}
+    query_search = {}
+
+    for token in lemonized_query:
+        index_file = open("PIndex.txt", 'r')
+        #ref = open(reference_file,'r')
+        print("TOKENIZED AND LEMMATIZED QUERY: ", token)
+        retrieve_corpus_data(
+            token, lemonized_query[token], query_terms, query_search, index_file)
+        index_file.close()
+
+    # reference_file = open("Document_Reference.txt", 'r')
+    normalize_terms(query_terms, query_search, "Document_Reference.txt")
+    # reference_file.close()
+
+    q = 'query.txt'
+    q_file = open(q, 'w')
+    print("Retrieved URLs")
+    retrieved_docIDs = print_ranked_results(
+        query_search, file_directory, q_file)
+    q_file.close()
 
     if query == "":
         print("TYPE SOMETHING!")
-    elif query not in index:
+    elif len(retrieved_docIDs) == 0:
         noMatchLabel.grid()
+        search_results.delete(0, END)
         print("No Matches")
     else:
         no_match_label.grid_remove()
         # delete_frame_labels()
         search_results.delete(0, END)
 
-        print(query, index[query])
-        for posting in index[query]:
+        # print(query, index[query])
+        # for posting in index[query]:
+        #     print(file_directory[posting])
+        # make_labels_for_urls(index[query])
+        for posting in retrieved_docIDs:
             print(file_directory[posting])
-        make_labels_for_urls(index[query])
+        make_labels_for_urls(retrieved_docIDs)
 
 
 def make_labels_for_urls(index_query):
@@ -65,6 +102,7 @@ def make_labels_for_urls(index_query):
 
         search_results.insert(
             space_row, "--------------------------------------------------------------------------------")
+
         title_row += 4
         url_row += 4
         desc_row += 4
@@ -113,6 +151,8 @@ def get_url_description(posting):
 
 root = Tk()
 root.title("Rey and Hannah's Search Engine")
+
+root.configure(background='black')
 
 topFrame = Frame()
 topFrame.pack()

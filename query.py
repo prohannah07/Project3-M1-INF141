@@ -59,6 +59,11 @@ def enter_query():
     return lem_query
 
 
+def lemon_query(q):
+    lem_query = lemmatize_query(q, lemon)
+    return lem_query
+
+
 def stop_words_size():
     size = sys.getsizeof(stop_words_final)
     print("stop words size: ", size, "bytes")
