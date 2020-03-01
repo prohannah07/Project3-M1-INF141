@@ -22,6 +22,7 @@ for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
 dictionary = {}  # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
+global dictionary_list  # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
 visitedDocuments = 0
 uniqueWords = 0
 lemon = WordNetLemmatizer()  # nltk lemmatizer
@@ -182,9 +183,11 @@ def ll_make_list(ll):
 
 
 def dict_posting_to_list():
+    global dictionary_list
     new_dict = {}
     for token in dictionary:
         new_dict[token] = ll_make_list(dictionary[token])
+    dictionary_list = new_dict
     return new_dict
 
 

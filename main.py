@@ -1,6 +1,8 @@
 import os
 import sys
+from tkinter import *
 
+import gui
 from query import enter_query
 from query import stop_words_size
 from corpus import json_to_dict
@@ -26,10 +28,11 @@ if __name__ == "__main__":
     index.build_index(file_directory, corpus)
     # i.write("hello world")
     index.write_index_to_file(i)
-    print(index.ll_make_list(index.dictionary["have"]))
-    print(index.dict_posting_to_list())
+    # print(index.ll_make_list(index.dictionary["have"]))
+    # print(index.dict_posting_to_list())
     index.write_index_to_json_file(index_json_file)
     # print(index.dictionary)
+    # print(index.dictionary_list)
     print("# VISITED DOCUMENTS: " + str(index.visitedDocuments))
     print("UNIQUE WORDS: " + str(len(index.dictionary)))
 
@@ -57,3 +60,8 @@ if __name__ == "__main__":
     inf.close()
     mon.close()
     irv.close()
+
+    gui.corpus_path = corpus
+    gui.json_to_dict()
+    gui.index_to_dict("index.json")
+    gui.root.mainloop()
