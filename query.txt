@@ -1,0 +1,23 @@
+NUMBER OF URLs RETRIEVED: 21
+FIRST 20 URLs:
+1	docID: 0/196	score: 0.13942109816071174	URL: www.ics.uci.edu/~ejw/authoring/orem/namespace
+2	docID: 0/120	score: 0.12757464604963792	URL: fano.ics.uci.edu/cites/Author/Bob-Hertzberger.html
+3	docID: 0/10	score: 0.12254781635008767	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
+4	docID: 0/160	score: 0.11601036244890467	URL: fano.ics.uci.edu/cites/Author/Takeo-Kanade.html
+5	docID: 0/104	score: 0.115019270214194	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
+6	docID: 0/185	score: 0.10063736592521379	URL: fano.ics.uci.edu/cites/Author/Dorit-Hochbaum.html
+7	docID: 0/142	score: 0.100525771610006	URL: www.ics.uci.edu/~ejw/authoring/sanmateo/whitehead_slides/tsld008.htm
+8	docID: 0/147	score: 0.09277010821419684	URL: www.ics.uci.edu/~bic/os/OS/OS-TOC.htm
+9	docID: 0/11	score: 0.08789799906637259	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
+10	docID: 0/134	score: 0.0874713519213623	URL: vcp.ics.uci.edu/content/continuous-coordination-tools-and-their-evaluation-0
+11	docID: 0/177	score: 0.08377283935182399	URL: vcp.ics.uci.edu/user/login?destination=comment%2Freply%2F439%23comment-form
+12	docID: 0/178	score: 0.0813249358302224	URL: fano.ics.uci.edu/cites/Publication/BusKanRag-Algs-96.html
+13	docID: 0/144	score: 0.07962361195330757	URL: fano.ics.uci.edu/cites/Publication/Epp-TR-95-50.html
+14	docID: 0/145	score: 0.07802478234941179	URL: fano.ics.uci.edu/cites/Publication/FraOss-TR-99.html
+15	docID: 0/106	score: 0.047991238932850774	URL: www.ics.uci.edu/~dvk/pub/SIGMODR04_dvk.html
+16	docID: 0/108	score: 0.04128977753197873	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
+17	docID: 0/129	score: 0.03437768970256854	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2page%2F2%2Fpage/2/&afg42_page_id=2&afg44_page_id=4&afg43_page_id=3&afg34_page_id=4
+18	docID: 0/103	score: 0.03437768970256854	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
+19	docID: 0/141	score: 0.030104216444650566	URL: www.ics.uci.edu/~sjordan/research/net neutrality.html
+20	docID: 0/112	score: 0.022124907318058717	URL: cgvw.ics.uci.edu/the-future-of-research-in-computer-games-and-virtual-worlds
+
