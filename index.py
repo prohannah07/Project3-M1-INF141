@@ -25,9 +25,9 @@ for word in stop_words:
     stop_words_final.extend(word_tokenize(word))
 
 dictionary = {}  # Key:Value -> Token:LinkedList<DocID> -> DocIDs are Nodes
-reference = {} # Key:Value -> DocId:List<Token>
-tagWeightDict = {"title": 5,"h1": 4, "h2": 3, "h3": 2, "strong": 1}
-excludedParentTags = set(["script","style","head"])
+reference = {}  # Key:Value -> DocId:List<Token>
+tagWeightDict = {"title": 5, "h1": 4, "h2": 3, "h3": 2, "strong": 1}
+excludedParentTags = set(["script", "style", "head"])
 visitedDocuments = 0
 invalidDocuments = 0
 uniqueWords = 0
@@ -35,6 +35,7 @@ lemon = WordNetLemmatizer()  # nltk lemmatizer
 
 
 def parse_element(parent, folderNum, fileNum):
+    # print(folderNum, fileNum)
     # Function takes in a Parent Element and finds the Children Elements
     # FolderNum and FileNum refer to the file that the function is currently being called on
     # Initially (before recursion) the Parent Element is the Document Element (aka the entire HTML code)
@@ -59,31 +60,37 @@ def parse_element(parent, folderNum, fileNum):
                     if pos != "":
                         lemma = lemon.lemmatize(token, pos)  # Lemmatizes Token
                         if docID not in reference:
-                            reference[docID] = {lemma: {"weight":0} }
+                            reference[docID] = {lemma: {"weight": 0}}
                         else:
-                            reference[docID][lemma] = {"weight":0}
-                        if lemma in dictionary and dictionary[lemma].head.docID != docID: # If Token is in Dictionary AND Posting does not contain current DocID
+                            reference[docID][lemma] = {"weight": 0}
+                        # If Token is in Dictionary AND Posting does not contain current DocID
+                        if lemma in dictionary and dictionary[lemma].head.docID != docID:
                             posting = dictionary[lemma]
                             currentDoc = Node(docID)  # Create a new DocID
-                            check_tag_weight(parent.name,currentDoc)
-                            currentDoc.next = posting.head # Make current DocID NEXT point to -> Posting
-                            posting.head = currentDoc # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                            check_tag_weight(parent.name, currentDoc)
+                            currentDoc.next = posting.head  # Make current DocID NEXT point to -> Posting
+                            # Key:Value -> Token:Posting    # Make current DocID HEAD of Token's Posting
+                            posting.head = currentDoc
                             posting.len += 1
-                        elif lemma in dictionary: # If Token is in Dictionary AND Posting does contain current DocID
+                        elif lemma in dictionary:  # If Token is in Dictionary AND Posting does contain current DocID
                             currentDoc = dictionary[lemma].head
-                            check_tag_weight(parent.name,currentDoc)
+                            check_tag_weight(parent.name, currentDoc)
                             currentDoc.count += 1
-                            currentDoc.tf = compute_weighted_term_frequency(currentDoc.count)
+                            currentDoc.tf = compute_weighted_term_frequency(
+                                currentDoc.count)
                         elif lemma not in dictionary:  # If Token is not in Dictionary
                             posting = LinkedList()  # Create a new Posting (LinkedList<DocID>)
                             currentDoc = Node(docID)  # Create a new DocID
-                            check_tag_weight(parent.name,currentDoc)
+                            check_tag_weight(parent.name, currentDoc)
                             posting.head = currentDoc  # Point new Posting HEAD -> new  DocID
                             posting.len += 1
-                            dictionary[lemma] = posting # Key:Value -> Token:Posting
+                            # Key:Value -> Token:Posting
+                            dictionary[lemma] = posting
         if(isinstance(child, bs4.element.Tag)):  # If child is Tag we want to see if it has children
             # print("Element Name: " + child.name)
+            # print(folderNum, fileNum)
             parse_element(child, folderNum, fileNum)
+
 
 def check_tag_weight(parent_tag, currentDoc):
     global tagWeightDict
@@ -91,6 +98,7 @@ def check_tag_weight(parent_tag, currentDoc):
         if currentDoc.tagWeight < tagWeightDict[parent_tag]:
             currentDoc.tagWeight = tagWeightDict[parent_tag]
             currentDoc.priorityTag = parent_tag
+
 
 def get_wordnet_pos(treebank_tag):
     # Function to find part of speech
@@ -154,24 +162,58 @@ def build_index(file_directory, corpus_path):
     global invalidDocuments
     counter = 0
     for key in file_directory:
-        if(counter < 20):
+        if(counter < 100):
             folder_file_pair = key.split("/")
             folderNum = folder_file_pair[0]
             fileNum = folder_file_pair[1]
             URL = file_directory[key]
-            if( is_valid(URL) ):
-                print("Folder: " + folderNum + "    File: " + fileNum + "   URL: " + URL)
+            if(is_valid(URL)):
+                print("Folder: " + folderNum + "    File: " +
+                      fileNum + "   URL: " + URL)
                 f = open(os.path.join(corpus_path, folderNum,
-                                    fileNum), 'r', encoding='utf8')
-                soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
-                parse_element(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
+                                      fileNum), 'r', encoding='utf8')
+                # Parse Current HTML Document
+                soup = BeautifulSoup(f, 'html5lib')
+                # A Recursive Function that goes through HTML Document Tags and Text
+                parse_element(soup, folderNum, fileNum)
                 visitedDocuments += 1
                 counter += 1
             else:
-                print("NOT VALID - Folder: " + folderNum + "    File: " + fileNum + "   URL: " + URL)
+                print("NOT VALID - Folder: " + folderNum +
+                      "    File: " + fileNum + "   URL: " + URL)
                 invalidDocuments += 1
         else:
             break
+
+# def build_index(file_directory, corpus_path):
+#     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
+#     # Then calls functions to parse HTML Doc and go through its contents
+#     global visitedDocuments
+#     global invalidDocuments
+#     # counter = 0
+#     for key in file_directory:
+#         # if(counter < 20):
+#         folder_file_pair = key.split("/")
+#         folderNum = folder_file_pair[0]
+#         fileNum = folder_file_pair[1]
+#         URL = file_directory[key]
+#         if(is_valid(URL)):
+#             print("Folder: " + folderNum + "    File: " +
+#                   fileNum + "   URL: " + URL)
+#             f = open(os.path.join(corpus_path, folderNum,
+#                                   fileNum), 'r', encoding='utf8')
+#             soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+#             # A Recursive Function that goes through HTML Document Tags and Text
+#             parse_element(soup, folderNum, fileNum)
+#             visitedDocuments += 1
+#             # counter += 1
+#         else:
+#             print("NOT VALID - Folder: " + folderNum +
+#                   "    File: " + fileNum + "   URL: " + URL)
+#             invalidDocuments += 1
+#         # else:
+#         #     break
+
 
 def build_test(file_directory, corpus_path):
     global visitedDocuments
@@ -179,14 +221,15 @@ def build_test(file_directory, corpus_path):
     fileNum = "23"
     folderNum = "30"
     f = open(os.path.join(corpus_path, folderNum,
-                                    fileNum), 'r', encoding='utf8')
-    soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
-    parse_element(soup, folderNum, fileNum) # A Recursive Function that goes through HTML Document Tags and Text
+                          fileNum), 'r', encoding='utf8')
+    soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+    # A Recursive Function that goes through HTML Document Tags and Text
+    parse_element(soup, folderNum, fileNum)
     visitedDocuments += 1
 
 
 def compute_inverse_document_frequency(token, posting, total_documents):
-    idf = log10(total_documents/posting.len)
+    idf = log10(total_documents / posting.len)
     return idf
 
 
@@ -220,7 +263,8 @@ def write_reference_to_file(file):
             file.write(";" + str(reference[docID][token]["weight"]))
         file.write("\n")
 
-def write_index_to_file(file,file2):
+
+def write_index_to_file(file, file2):
     global visitedDocuments
     total_documents = visitedDocuments
     for key in dictionary:
@@ -229,17 +273,21 @@ def write_index_to_file(file,file2):
         file.write(key)
         file2.write(key)
         file2.write("|" + str(posting.len))
-        posting.idf = compute_inverse_document_frequency(key,dictionary[key],total_documents)
-        current.tf_idf = compute_tf_idf(current.tf,posting.idf)
-        file.write("    Inverse Document Frequency: " + str(posting.idf) + "\n")
+        posting.idf = compute_inverse_document_frequency(
+            key, dictionary[key], total_documents)
+        current.tf_idf = compute_tf_idf(current.tf, posting.idf)
+        file.write("    Inverse Document Frequency: " +
+                   str(posting.idf) + "\n")
         file2.write("|" + str(posting.idf))
-        file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "    Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
+        file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag +
+                   "   Weight: " + str(current.tagWeight) + "    Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
         file2.write("|" + current.docID + ";" + str(current.tf_idf))
         reference[current.docID][key]["weight"] = current.tf_idf
         while(current.next != None):
             current = current.next
-            current.tf_idf = compute_tf_idf(current.tf,posting.idf)
-            file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag + "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
+            current.tf_idf = compute_tf_idf(current.tf, posting.idf)
+            file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag +
+                       "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
             file2.write("|" + current.docID + ";" + str(current.tf_idf))
             reference[current.docID][key]["weight"] = current.tf_idf
         file.write("END" + "\n")

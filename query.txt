@@ -1,21 +1,37 @@
-NUMBER OF URLs RETRIEVED: 10
+NUMBER OF URLs RETRIEVED: 2
 FIRST 20 URLs:
-1	docID: 0/113	score: 0.05804397845993357	URL: fano.ics.uci.edu/cites/Document/On-reset-sequence-length.html
-2	docID: 0/10	score: 0.05725499600736189	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
-3	docID: 0/102	score: 0.055954739940276506	URL: www.ics.uci.edu/~dock/mkayala/upload/scratch
-4	docID: 0/11	score: 0.047839083073987494	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
-5	docID: 0/105	score: 0.047489156481732464	URL: www.ics.uci.edu/~michele/Buttons-old/Test%20Buttons?C=D;O=A
-6	docID: 0/104	score: 0.046553616060735124	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
-7	docID: 0/100	score: 0.043344318556880965	URL: fano.ics.uci.edu/cites/Document/Fully-dynamic-min-cut.html
-8	docID: 0/116	score: 0.0416037057130661	URL: www.ics.uci.edu/~kay/courses/141/hw
-9	docID: 0/1	score: 0.037757313422967384	URL: www.ics.uci.edu/~ejw/pres/stc-99/sld009.htm
-10	docID: 0/110	score: 0.015851875853338762	URL: www.ics.uci.edu/~mlearn/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/Human+Activity+Recognition+Using+Smartphones
-NUMBER OF URLs RETRIEVED: 7
+1	docID: 0/174	score: 0.0614669058400238	URL: computableplant.ics.uci.edu/publications.html
+2	docID: 0/106	score: 0.05490715699413483	URL: www.ics.uci.edu/~dvk/pub/SIGMODR04_dvk.html
+NUMBER OF URLs RETRIEVED: 9
 FIRST 20 URLs:
-1	docID: 0/1	score: 0.2520852748683048	URL: www.ics.uci.edu/~ejw/pres/stc-99/sld009.htm
-2	docID: 0/101	score: 0.021342886851970767	URL: cbcl.ics.uci.edu/doku.php/software/arem?do=login&sectok=dd041326677606876341a676d7ce3884
-3	docID: 0/115	score: 0.009548827974555687	URL: www.ics.uci.edu/alumni/mentor/hall_of_fame/hall_of_fame/stayconnected/hall_of_fame/stayconnected/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/stayconnected/hall_of_fame/inductees.aspx.php
-4	docID: 0/108	score: 0.009448720567573588	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
-5	docID: 0/110	score: 0.007940191239369431	URL: www.ics.uci.edu/~mlearn/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/datasets/Human+Activity+Recognition+Using+Smartphones
-6	docID: 0/103	score: 0.007402549570144228	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
-7	docID: 0/112	score: 0.005264167332142233	URL: cgvw.ics.uci.edu/the-future-of-research-in-computer-games-and-virtual-worlds
+1	docID: 0/15	score: 0.068372917250263	URL: www.ics.uci.edu/faculty/profiles/view_faculty.php/faculty/centers/faculty/about/about_contact.php/about/about_contact.php/ugrad/QA_Petitions/community
+2	docID: 0/137	score: 0.06658685112369285	URL: www.ics.uci.edu/ugrad/degrees/Double_Majors.php
+3	docID: 0/172	score: 0.05935786453598152	URL: sdcl.ics.uci.edu/2015/06/end-of-quarter-lunch-2
+4	docID: 0/168	score: 0.04844657928815899	URL: www.ics.uci.edu/alumni/mentor/stayconnected/stayconnected/stayconnected/hall_of_fame/stayconnected/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/stayconnected/stayconnected/index.php
+5	docID: 0/180	score: 0.04785200956610192	URL: www.ics.uci.edu/alumni/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/hall_of_fame/stayconnected/stayconnected/stayconnected/index.php
+6	docID: 0/115	score: 0.047446315915487335	URL: www.ics.uci.edu/alumni/mentor/hall_of_fame/hall_of_fame/stayconnected/hall_of_fame/stayconnected/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/hall_of_fame/stayconnected/stayconnected/hall_of_fame/stayconnected/hall_of_fame/stayconnected/hall_of_fame/inductees.aspx.php
+7	docID: 0/153	score: 0.028164725769431073	URL: www.ics.uci.edu/facebook/login/browse/fanned_pages/events/252272701892321/search/str/%25E9%259D%259E%25E8%2590%25A5%25E5%2588%25A9%25E7%25BB%2584%25E7%25BB%2587/keywords_pages/UCIBrenICS/photos/a.10150104180706909.283411.106291486908/10154408253796909?type=3
+8	docID: 0/129	score: 0.024726776858311195	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2page%2F2%2Fpage/2/&afg42_page_id=2&afg44_page_id=4&afg43_page_id=3&afg34_page_id=4
+9	docID: 0/103	score: 0.024726776858311195	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
+NUMBER OF URLs RETRIEVED: 36
+FIRST 20 URLs:
+1	docID: 0/144	score: 0.08104895602177858	URL: fano.ics.uci.edu/cites/Publication/Epp-TR-95-50.html
+2	docID: 0/167	score: 0.07866016580356432	URL: fano.ics.uci.edu/cites/Organization/Georgetown-Univ-Computer-Science-Dept.html
+3	docID: 0/169	score: 0.06791370518777116	URL: www.ics.uci.edu/prospective/ko/degrees/business-information-management
+4	docID: 0/120	score: 0.06744990143871425	URL: fano.ics.uci.edu/cites/Author/Bob-Hertzberger.html
+5	docID: 0/113	score: 0.0651797143021307	URL: fano.ics.uci.edu/cites/Document/On-reset-sequence-length.html
+6	docID: 0/139	score: 0.0650411974378375	URL: fano.ics.uci.edu/cites/Organization/Cambridge-Press.html
+7	docID: 0/173	score: 0.06112836855667475	URL: fano.ics.uci.edu/cites/Location/Proc-4th-AGILE-Conf-Geographic-Science.html
+8	docID: 0/10	score: 0.05973128308818585	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
+9	docID: 0/124	score: 0.05759581199277583	URL: fano.ics.uci.edu/cites/Organization/Univ-di-Palermo-Dip-di-Matematica-Appl-Lab-for-Computer-Science.html
+10	docID: 0/171	score: 0.05758085260499196	URL: www.ics.uci.edu/prospective/ko/contact/student-affairs/contact/contact/contact/contact/contact/contact/student-affairs/contact/student-affairs/contact/student-affairs/contact/student-affairs/%E2%80%8B
+11	docID: 0/146	score: 0.056871019323075554	URL: sli.ics.uci.edu/Profiles/Ihler
+12	docID: 0/195	score: 0.054556228830626365	URL: fano.ics.uci.edu/cites/Location/Proc-14th-Int-Worksh-Qualitative-Reasoning-(QR-2000).html
+13	docID: 0/160	score: 0.054472262862918445	URL: fano.ics.uci.edu/cites/Author/Takeo-Kanade.html
+14	docID: 0/128	score: 0.054305126972370346	URL: fano.ics.uci.edu/ca/gliders/g21668.html
+15	docID: 0/104	score: 0.05242843146500261	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
+16	docID: 0/11	score: 0.050797866406107776	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
+17	docID: 0/100	score: 0.04583815877932223	URL: fano.ics.uci.edu/cites/Document/Fully-dynamic-min-cut.html
+18	docID: 0/185	score: 0.04581596587652003	URL: fano.ics.uci.edu/cites/Author/Dorit-Hochbaum.html
+19	docID: 0/178	score: 0.044188919007769965	URL: fano.ics.uci.edu/cites/Publication/BusKanRag-Algs-96.html
+20	docID: 0/170	score: 0.04373671270810052	URL: fano.ics.uci.edu/cites/Document/Gradient-superconvergence-on-uniform-simplicial-partitions-of-polytopes-.html
