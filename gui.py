@@ -46,6 +46,7 @@ def handle_query(entry, no_match_label):
 def make_labels_for_urls(index_query):
     title_row = 0
     url_row = 1
+    space_row = 2
     for posting in index_query:
         title = get_url_title(posting)
         get_url_description(posting)
@@ -53,8 +54,11 @@ def make_labels_for_urls(index_query):
         # Label(bottomFrame, text=file_directory[posting]).grid(row=url_row)
         search_results.insert(title_row, title)
         search_results.insert(url_row, file_directory[posting])
-        title_row += 2
-        url_row += 2
+        search_results.insert(
+            space_row, "--------------------------------------------------------------------------------")
+        title_row += 3
+        url_row += 3
+        space_row += 3
 
 
 def get_url_title(posting):
@@ -121,7 +125,8 @@ search_button = Button(topFrame, text="Search",
                        command=handle_query_with_arg, height=2, width=10)
 search_button.grid(row=1, column=1, sticky=W)
 
-search_results = Listbox(topFrame, width=80, height=50)
+search_results = Listbox(topFrame, width=80, height=50,
+                         borderwidth=20, relief=FLAT)
 search_results.grid(row=3, columnspan=2)
 
 # root.maxsize(1000, 500)
