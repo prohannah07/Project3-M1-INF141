@@ -44,20 +44,21 @@ def print_ranked_results(query_search, file_directory, output_file):
     output_file.write("NUMBER OF URLs RETRIEVED: " + str(len(query_search)) + "\n")
     output_file.write("FIRST 20 URLs:" + "\n")
     count = 0
-    if len(query_search) < 20:
-        for docID in query_search:
+    ranked = sorted( list(query_search.items()) , key =  lambda x:x[1]["document_score"], reverse=True)
+    if len(ranked) < 20:
+        for docID in ranked:
             print(str(count + 1) + "\t" + "docID: " +
-                docID + "\t" + "score: " + str(query_search[docID]["document_score"]) + "\t" + "URL: " + file_directory[docID])
+                docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]])
             output_file.write(str(count + 1) + "\t" + "docID: " +
-                            docID + "\t" + "score: " + str(query_search[docID]["document_score"]) + "\t" + "URL: " + file_directory[docID] + "\n")
+                            docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]] + "\n")
             count += 1
     else:
-        for docID in query_search:
+        for docID in ranked:
             if count < 20:
                 print(str(count + 1) + "\t" + "docID: " +
-                    docID + "\t" + "score: " + str(query_search[docID]["document_score"]) + "\t" + "URL: " + file_directory[docID])
+                    docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]])
                 output_file.write(str(count + 1) + "\t" + "docID: " +
-                                docID + "\t" + "score: " + str(query_search[docID]["document_score"]) + "\t" + "URL: " + file_directory[docID] + "\n")
+                                docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]] + "\n")
                 count += 1
             else:
                 break
