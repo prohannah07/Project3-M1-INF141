@@ -46,19 +46,29 @@ def handle_query(entry, no_match_label):
 def make_labels_for_urls(index_query):
     title_row = 0
     url_row = 1
-    space_row = 2
+    desc_row = 2
+    space_row = 3
     for posting in index_query:
         title = get_url_title(posting)
-        get_url_description(posting)
+        desc = get_url_description(posting)
+        # get_url_body_desc(posting)
         # Label(bottomFrame, text="title: " + title).grid(row=title_row)
         # Label(bottomFrame, text=file_directory[posting]).grid(row=url_row)
         search_results.insert(title_row, title)
+        search_results.itemconfig(title_row, fg="purple")
+
         search_results.insert(url_row, file_directory[posting])
+        search_results.itemconfig(url_row, fg="sky blue")
+
+        search_results.insert(desc_row, desc)
+        search_results.itemconfig(desc_row, fg="black")
+
         search_results.insert(
             space_row, "--------------------------------------------------------------------------------")
-        title_row += 3
-        url_row += 3
-        space_row += 3
+        title_row += 4
+        url_row += 4
+        desc_row += 4
+        space_row += 4
 
 
 def get_url_title(posting):
@@ -84,13 +94,13 @@ def get_url_description(posting):
     f = open(os.path.join(sys.argv[1], folder, file), 'r', encoding='utf8')
 
     soup = BeautifulSoup(f, 'lxml')
-    text = soup.get_text().split('\n')
+    text = soup.get_text().strip().split('\n')
     if len(text) == 0:
         print("NO DESCRIPTION")
         return "NO DESCRIPTION"
     else:
-        print(' '.join(text)[0:100])
-        return ' '.join(text)[0:100]
+        print(' '.join(text)[0:100].strip(" \n"))
+        return ' '.join(text)[0:300].strip(" \n")
 
 
 # def delete_frame_labels():
@@ -109,7 +119,8 @@ topFrame.pack()
 # bottomFrame = Frame()
 # bottomFrame.pack(side=BOTTOM)
 
-theLabel = Label(topFrame, text="Rey and Hannah's Search Engine!")
+theLabel = Label(
+    topFrame, text="Rey and Hannah's Search Engine!", font=(None, 40), borderwidth=20, relief=FLAT, fg="purple")
 theLabel.grid(row=0, columnspan=2)
 
 noMatchLabel = Label(topFrame, text="No Matches", fg="red")
@@ -125,9 +136,10 @@ search_button = Button(topFrame, text="Search",
                        command=handle_query_with_arg, height=2, width=10)
 search_button.grid(row=1, column=1, sticky=W)
 
-search_results = Listbox(topFrame, width=80, height=50,
+search_results = Listbox(topFrame, width=80, height=30,
                          borderwidth=20, relief=FLAT)
 search_results.grid(row=3, columnspan=2)
+
 
 # root.maxsize(1000, 500)
 # root.minsize(1000, 500)
