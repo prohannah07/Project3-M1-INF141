@@ -45,8 +45,8 @@ def parse_element(parent, folderNum, fileNum):
         # If child is string we want to tokenize it. Does not have children.
         if(isinstance(child, bs4.element.NavigableString) and parent.name not in excludedParentTags):
             # Outputs Tokens from the given string
-            # print("This Element is a Child of " + parent.name)
-            # print(child)
+            print("This Element is a Child of " + parent.name)
+            print(child)
             tokens = word_tokenize(child)
             tagged_tokens = pos_tag(tokens)  # Outputs List<Token,POS>
             # print(tokens)
@@ -176,8 +176,8 @@ def build_index(file_directory, corpus_path):
 def build_test(file_directory, corpus_path):
     global visitedDocuments
     global invalidDocuments
-    fileNum = "112"
-    folderNum = "0"
+    fileNum = "23"
+    folderNum = "30"
     f = open(os.path.join(corpus_path, folderNum,
                                     fileNum), 'r', encoding='utf8')
     soup = BeautifulSoup(f, 'html5lib') # Parse Current HTML Document
