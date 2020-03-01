@@ -44,9 +44,11 @@ def print_ranked_results(query_search, file_directory, output_file):
     output_file.write("NUMBER OF URLs RETRIEVED: " + str(len(query_search)) + "\n")
     output_file.write("FIRST 20 URLs:" + "\n")
     count = 0
+    docID_results = []
     ranked = sorted( list(query_search.items()) , key =  lambda x:x[1]["document_score"], reverse=True)
     if len(ranked) < 20:
         for docID in ranked:
+            docID_results.append(docID[0])
             print(str(count + 1) + "\t" + "docID: " +
                 docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]])
             output_file.write(str(count + 1) + "\t" + "docID: " +
@@ -55,6 +57,7 @@ def print_ranked_results(query_search, file_directory, output_file):
     else:
         for docID in ranked:
             if count < 20:
+                docID_results.append(docID[0])
                 print(str(count + 1) + "\t" + "docID: " +
                     docID[0] + "\t" + "score: " + str(docID[1]["document_score"]) + "\t" + "URL: " + file_directory[docID[0]])
                 output_file.write(str(count + 1) + "\t" + "docID: " +
@@ -62,6 +65,7 @@ def print_ranked_results(query_search, file_directory, output_file):
                 count += 1
             else:
                 break
+    return docID_results
 
 
 def retrieve_corpus_data(qtoken, qtoken_freq, query_terms, query_search, index_file):
@@ -110,33 +114,61 @@ def retrieve_corpus_data(qtoken, qtoken_freq, query_terms, query_search, index_f
 #                 query_search[docID]["document_score"] += query_search[docID][term]["normal"] * query_terms[term]["normal"]
 
 
+# def normalize_terms(query_terms, query_search, reference_file):
+#     query_terms['length_norm'] = sqrt(query_terms['length_norm'])
+#     query_terms_normalizer = query_terms['length_norm']
+#     for term in query_terms:
+#         if term != "length_norm" and term != "document_score":
+#             # Normalization of each query term in query
+#             query_terms[term]["normal"] = query_terms[term]["weight"] / query_terms_normalizer
+#     for docID in query_search:
+#         ref_file = open(reference_file,'r')
+#         for line in ref_file:
+#             document_token_pair = line.split("|")
+#             document = document_token_pair[0]
+#             tokens = document_token_pair[1:]
+#             if document == docID:
+#                 for token in tokens:
+#                     token = token.split(";")
+#                     if token[0] not in query_search[docID]:
+#                         term = token[0]
+#                         query_search[docID][term] = {"weight":float(token[1]), "normal":0}
+#                         tf_idf = query_search[docID][term]["weight"]
+#                         query_search[docID]["length_norm"] += tf_idf * tf_idf
+#         ref_file.close()
+#     for docID in query_search:
+#         query_search[docID]["length_norm"] = sqrt(query_search[docID]["length_norm"])
+#         query_search_normalizer = query_search[docID]['length_norm']
+#         for term in query_search[docID]:
+#             if term != "length_norm" and term in query_terms:
+#                 # Normalization of each term in document
+#                 query_search[docID][term]["normal"] = query_search[docID][term]["weight"] / query_search_normalizer
+#                 # term normalization * query term normalization = document term dot product
+#                 # document score += document term dot product
+#                 query_search[docID]["document_score"] += query_search[docID][term]["normal"] * query_terms[term]["normal"]
+
+
 def normalize_terms(query_terms, query_search, reference_file):
     query_terms['length_norm'] = sqrt(query_terms['length_norm'])
     query_terms_normalizer = query_terms['length_norm']
+    reference_documents = {}
     for term in query_terms:
         if term != "length_norm" and term != "document_score":
             # Normalization of each query term in query
             query_terms[term]["normal"] = query_terms[term]["weight"] / query_terms_normalizer
-    for docID in query_search:
-        ref_file = open(reference_file,'r')
-        for line in ref_file:
-            document_token_pair = line.split("|")
-            document = document_token_pair[0]
-            tokens = document_token_pair[1:]
-            if document == docID:
-                for token in tokens:
-                    token = token.split(";")
-                    if token[0] not in query_search[docID]:
-                        term = token[0]
-                        query_search[docID][term] = {"weight":float(token[1]), "normal":0}
-                        tf_idf = query_search[docID][term]["weight"]
-                        query_search[docID]["length_norm"] += tf_idf * tf_idf
-        ref_file.close()
+    ref_file = open(reference_file,'r')
+    for line in ref_file:
+        document_token_pair = line.split("|")
+        document = document_token_pair[0]
+        token_count = document_token_pair[1]
+        if document in query_search:
+            query_search[document]["length_norm"] += int(token_count) - len(query_terms)
+    ref_file.close()
     for docID in query_search:
         query_search[docID]["length_norm"] = sqrt(query_search[docID]["length_norm"])
         query_search_normalizer = query_search[docID]['length_norm']
         for term in query_search[docID]:
-            if term != "length_norm" and term in query_terms:
+            if term != "length_norm" and term != "document_score":
                 # Normalization of each term in document
                 query_search[docID][term]["normal"] = query_search[docID][term]["weight"] / query_search_normalizer
                 # term normalization * query term normalization = document term dot product

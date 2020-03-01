@@ -60,9 +60,11 @@ def parse_element(parent, folderNum, fileNum):
                     if pos != "":
                         lemma = lemon.lemmatize(token, pos)  # Lemmatizes Token
                         if docID not in reference:
-                            reference[docID] = {lemma: {"weight": 0}}
+                            reference[docID] = 1
+                            # reference[docID] = {lemma: {"weight": 0}}
                         else:
-                            reference[docID][lemma] = {"weight": 0}
+                            reference[docID] += 1
+                            # reference[docID][lemma] = {"weight": 0}
                         # If Token is in Dictionary AND Posting does not contain current DocID
                         if lemma in dictionary and dictionary[lemma].head.docID != docID:
                             posting = dictionary[lemma]
@@ -255,14 +257,19 @@ def index_size_final():
     return size / 1000
 
 
+# def write_reference_to_file(file):
+#     for docID in reference:
+#         file.write(docID)
+#         for token in reference[docID]:
+#             file.write("|" + token)
+#             file.write(";" + str(reference[docID][token]["weight"]))
+#         file.write("\n")
+
 def write_reference_to_file(file):
     for docID in reference:
         file.write(docID)
-        for token in reference[docID]:
-            file.write("|" + token)
-            file.write(";" + str(reference[docID][token]["weight"]))
+        file.write( "|" + str(reference[docID]))
         file.write("\n")
-
 
 def write_index_to_file(file, file2):
     global visitedDocuments
@@ -282,13 +289,13 @@ def write_index_to_file(file, file2):
         file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag +
                    "   Weight: " + str(current.tagWeight) + "    Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
         file2.write("|" + current.docID + ";" + str(current.tf_idf))
-        reference[current.docID][key]["weight"] = current.tf_idf
+        # reference[current.docID][key]["weight"] = current.tf_idf
         while(current.next != None):
             current = current.next
             current.tf_idf = compute_tf_idf(current.tf, posting.idf, current.tagWeight)
             file.write("DocID: " + current.docID + "  Count: " + str(current.count) + "   Priority: " + current.priorityTag +
                        "   Weight: " + str(current.tagWeight) + "   Term Frequency: " + str(current.tf) + "   tf-idf: " + str(current.tf_idf) + "\n")
             file2.write("|" + current.docID + ";" + str(current.tf_idf))
-            reference[current.docID][key]["weight"] = current.tf_idf
+            # reference[current.docID][key]["weight"] = current.tf_idf
         file.write("END" + "\n")
         file2.write("\n")

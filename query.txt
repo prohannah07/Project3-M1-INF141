@@ -1,44 +1,22 @@
-NUMBER OF URLs RETRIEVED: 33
-FIRST 20 URLs:
-1	docID: 0/1	score: 0.2773868940216606	URL: www.ics.uci.edu/~ejw/pres/stc-99/sld009.htm
-2	docID: 0/119	score: 0.17619773129345564	URL: www.ics.uci.edu/~wscacchi/GameLab/UCI-DIP-Project/UCI-DIP-ProjectDocs/FinalReport?C=D;O=D
-3	docID: 0/162	score: 0.14700948299568156	URL: duttgroup.ics.uci.edu/doku.php/projects?image=juan.png&ns=&tab_details=view&do=media
-4	docID: 0/159	score: 0.14528167795199143	URL: duttgroup.ics.uci.edu/doku.php/projects?image=mahesh-mamidipaka.jpg&ns=&tab_details=view&do=media
-5	docID: 0/147	score: 0.06658186747442016	URL: www.ics.uci.edu/~bic/os/OS/OS-TOC.htm
-6	docID: 0/16	score: 0.04087921277970609	URL: cbcl.ics.uci.edu/doku.php/start?do=login&sectok=26d6756fede40d7a1855d53915edf417
-7	docID: 0/193	score: 0.0386462092133992	URL: honors.ics.uci.edu/program-overview/step-5
-8	docID: 0/140	score: 0.03740275464837068	URL: cbcl.ics.uci.edu/doku.php/software/arem?do=login&sectok=ffed3d3e353a2c7891604a75206a2892
-9	docID: 0/101	score: 0.03740275464837068	URL: cbcl.ics.uci.edu/doku.php/software/arem?do=login&sectok=dd041326677606876341a676d7ce3884
-10	docID: 0/154	score: 0.037313440528246006	URL: www.ics.uci.edu/~magda/Courses/Wireless/tcom510?C=D;O=A
-11	docID: 0/130	score: 0.03644492834737163	URL: www.ics.uci.edu/~kay/courses/h22/hw/hw7.html
-12	docID: 0/155	score: 0.03124637817754106	URL: ngs.ics.uci.edu/researcher
-13	docID: 0/15	score: 0.030857815261861366	URL: www.ics.uci.edu/faculty/profiles/view_faculty.php/faculty/centers/faculty/about/about_contact.php/about/about_contact.php/ugrad/QA_Petitions/community
-14	docID: 0/18	score: 0.030505275726648788	URL: duttgroup.ics.uci.edu/doku.php/home?ns=&tab_files=files&do=media&tab_details=history&image=esweek2016-pic.jpg
-15	docID: 0/172	score: 0.029307027336067975	URL: sdcl.ics.uci.edu/2015/06/end-of-quarter-lunch-2
-16	docID: 0/121	score: 0.02885142674232129	URL: duttgroup.ics.uci.edu/doku.php/home?tab_files=upload&do=media&tab_details=view&image=andre2.jpg&ns=
-17	docID: 0/148	score: 0.027952890748997188	URL: duttgroup.ics.uci.edu/doku.php/grouptab_details_view_image_rahmani.jpg_ns_do_media?image=codrut.jpg&ns=&tab_details=view&do=media&tab_files=files
-18	docID: 0/187	score: 0.027937633176760252	URL: duttgroup.ics.uci.edu/doku.php/grouptab_details_view_image_rahmani.jpg_ns_do_media?image=dutt_small.jpg&ns=&tab_details=view&do=media
-19	docID: 0/131	score: 0.026768839078137728	URL: duttgroup.ics.uci.edu/doku.php/drg101_admin?ns=documents&tab_files=files&do=media&tab_details=history&image=hossein.jpg
-20	docID: 0/137	score: 0.026080203287727845	URL: www.ics.uci.edu/ugrad/degrees/Double_Majors.php
 NUMBER OF URLs RETRIEVED: 21
 FIRST 20 URLs:
-1	docID: 0/196	score: 0.10180113356034809	URL: www.ics.uci.edu/~ejw/authoring/orem/namespace
-2	docID: 0/120	score: 0.09166409967767163	URL: fano.ics.uci.edu/cites/Author/Bob-Hertzberger.html
-3	docID: 0/10	score: 0.08628182112458747	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
-4	docID: 0/160	score: 0.0805586132006602	URL: fano.ics.uci.edu/cites/Author/Takeo-Kanade.html
-5	docID: 0/104	score: 0.07982626328830443	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
-6	docID: 0/185	score: 0.07257358270587604	URL: fano.ics.uci.edu/cites/Author/Dorit-Hochbaum.html
-7	docID: 0/144	score: 0.06998497925199289	URL: fano.ics.uci.edu/cites/Publication/Epp-TR-95-50.html
-8	docID: 0/11	score: 0.06660515080308181	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
-9	docID: 0/147	score: 0.06172701838932891	URL: www.ics.uci.edu/~bic/os/OS/OS-TOC.htm
-10	docID: 0/178	score: 0.05456061088318723	URL: fano.ics.uci.edu/cites/Publication/BusKanRag-Algs-96.html
-11	docID: 0/145	score: 0.05410303937300977	URL: fano.ics.uci.edu/cites/Publication/FraOss-TR-99.html
-12	docID: 0/177	score: 0.050219160331831283	URL: vcp.ics.uci.edu/user/login?destination=comment%2Freply%2F439%23comment-form
-13	docID: 0/134	score: 0.049600512268159536	URL: vcp.ics.uci.edu/content/continuous-coordination-tools-and-their-evaluation-0
-14	docID: 0/142	score: 0.04209360542096913	URL: www.ics.uci.edu/~ejw/authoring/sanmateo/whitehead_slides/tsld008.htm
-15	docID: 0/129	score: 0.030754765133373843	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2page%2F2%2Fpage/2/&afg42_page_id=2&afg44_page_id=4&afg43_page_id=3&afg34_page_id=4
-16	docID: 0/103	score: 0.030754765133373843	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
-17	docID: 0/108	score: 0.027471214233417206	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
-18	docID: 0/106	score: 0.025469156363424516	URL: www.ics.uci.edu/~dvk/pub/SIGMODR04_dvk.html
-19	docID: 0/141	score: 0.022828061115360003	URL: www.ics.uci.edu/~sjordan/research/net neutrality.html
-20	docID: 0/112	score: 0.016374820938859502	URL: cgvw.ics.uci.edu/the-future-of-research-in-computer-games-and-virtual-worlds
+1	docID: 0/196	score: 0.13942109816071174	URL: www.ics.uci.edu/~ejw/authoring/orem/namespace
+2	docID: 0/120	score: 0.12757464604963792	URL: fano.ics.uci.edu/cites/Author/Bob-Hertzberger.html
+3	docID: 0/10	score: 0.12254781635008767	URL: fano.ics.uci.edu/cites/Author/Murray-Sherk.html
+4	docID: 0/160	score: 0.11601036244890467	URL: fano.ics.uci.edu/cites/Author/Takeo-Kanade.html
+5	docID: 0/104	score: 0.115019270214194	URL: fano.ics.uci.edu/cites/Author/Stefano-Leonardi.html
+6	docID: 0/185	score: 0.10063736592521379	URL: fano.ics.uci.edu/cites/Author/Dorit-Hochbaum.html
+7	docID: 0/142	score: 0.100525771610006	URL: www.ics.uci.edu/~ejw/authoring/sanmateo/whitehead_slides/tsld008.htm
+8	docID: 0/147	score: 0.09277010821419684	URL: www.ics.uci.edu/~bic/os/OS/OS-TOC.htm
+9	docID: 0/11	score: 0.08789799906637259	URL: fano.ics.uci.edu/cites/Publication/GesHofWal-TR-03.html
+10	docID: 0/134	score: 0.0874713519213623	URL: vcp.ics.uci.edu/content/continuous-coordination-tools-and-their-evaluation-0
+11	docID: 0/177	score: 0.08377283935182399	URL: vcp.ics.uci.edu/user/login?destination=comment%2Freply%2F439%23comment-form
+12	docID: 0/178	score: 0.0813249358302224	URL: fano.ics.uci.edu/cites/Publication/BusKanRag-Algs-96.html
+13	docID: 0/144	score: 0.07962361195330757	URL: fano.ics.uci.edu/cites/Publication/Epp-TR-95-50.html
+14	docID: 0/145	score: 0.07802478234941179	URL: fano.ics.uci.edu/cites/Publication/FraOss-TR-99.html
+15	docID: 0/106	score: 0.047991238932850774	URL: www.ics.uci.edu/~dvk/pub/SIGMODR04_dvk.html
+16	docID: 0/108	score: 0.04128977753197873	URL: vision.ics.uci.edu/papers/RamananBK_ICCV_2007
+17	docID: 0/129	score: 0.03437768970256854	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2page%2F2%2Fpage/2/&afg42_page_id=2&afg44_page_id=4&afg43_page_id=3&afg34_page_id=4
+18	docID: 0/103	score: 0.03437768970256854	URL: wics.ics.uci.edu/category/news/info-session?afg12_page_id=2&afg44_page_id=4&afg34_page_id=4&afg15_page_id=2&afg42_page_id=2&afg22_page_id=2
+19	docID: 0/141	score: 0.030104216444650566	URL: www.ics.uci.edu/~sjordan/research/net neutrality.html
+20	docID: 0/112	score: 0.022124907318058717	URL: cgvw.ics.uci.edu/the-future-of-research-in-computer-games-and-virtual-worlds
