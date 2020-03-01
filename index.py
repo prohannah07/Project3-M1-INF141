@@ -35,7 +35,7 @@ lemon = WordNetLemmatizer()  # nltk lemmatizer
 
 
 def parse_element(parent, folderNum, fileNum):
-    print(folderNum, fileNum)
+    # print(folderNum, fileNum)
     # Function takes in a Parent Element and finds the Children Elements
     # FolderNum and FileNum refer to the file that the function is currently being called on
     # Initially (before recursion) the Parent Element is the Document Element (aka the entire HTML code)
@@ -88,7 +88,7 @@ def parse_element(parent, folderNum, fileNum):
                             dictionary[lemma] = posting
         if(isinstance(child, bs4.element.Tag)):  # If child is Tag we want to see if it has children
             # print("Element Name: " + child.name)
-            print(folderNum, fileNum)
+            # print(folderNum, fileNum)
             parse_element(child, folderNum, fileNum)
 
 
@@ -155,64 +155,64 @@ def ll_len(ll):
     return length
 
 
-# def build_index(file_directory, corpus_path):
-#     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
-#     # Then calls functions to parse HTML Doc and go through its contents
-#     global visitedDocuments
-#     global invalidDocuments
-#     counter = 0
-#     for key in file_directory:
-#         if(counter < 10000):
-#             folder_file_pair = key.split("/")
-#             folderNum = folder_file_pair[0]
-#             fileNum = folder_file_pair[1]
-#             URL = file_directory[key]
-#             if(is_valid(URL)):
-#                 print("Folder: " + folderNum + "    File: " +
-#                       fileNum + "   URL: " + URL)
-#                 f = open(os.path.join(corpus_path, folderNum,
-#                                       fileNum), 'r', encoding='utf8')
-#                 # Parse Current HTML Document
-#                 soup = BeautifulSoup(f, 'html5lib')
-#                 # A Recursive Function that goes through HTML Document Tags and Text
-#                 parse_element(soup, folderNum, fileNum)
-#                 visitedDocuments += 1
-#                 counter += 1
-#             else:
-#                 print("NOT VALID - Folder: " + folderNum +
-#                       "    File: " + fileNum + "   URL: " + URL)
-#                 invalidDocuments += 1
-#         else:
-#             break
-
 def build_index(file_directory, corpus_path):
     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
     # Then calls functions to parse HTML Doc and go through its contents
     global visitedDocuments
     global invalidDocuments
-    # counter = 0
+    counter = 0
     for key in file_directory:
-        # if(counter < 20):
-        folder_file_pair = key.split("/")
-        folderNum = folder_file_pair[0]
-        fileNum = folder_file_pair[1]
-        URL = file_directory[key]
-        if(is_valid(URL)):
-            print("Folder: " + folderNum + "    File: " +
-                  fileNum + "   URL: " + URL)
-            f = open(os.path.join(corpus_path, folderNum,
-                                  fileNum), 'r', encoding='utf8')
-            soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
-            # A Recursive Function that goes through HTML Document Tags and Text
-            parse_element(soup, folderNum, fileNum)
-            visitedDocuments += 1
-            # counter += 1
+        if(counter < 100):
+            folder_file_pair = key.split("/")
+            folderNum = folder_file_pair[0]
+            fileNum = folder_file_pair[1]
+            URL = file_directory[key]
+            if(is_valid(URL)):
+                print("Folder: " + folderNum + "    File: " +
+                      fileNum + "   URL: " + URL)
+                f = open(os.path.join(corpus_path, folderNum,
+                                      fileNum), 'r', encoding='utf8')
+                # Parse Current HTML Document
+                soup = BeautifulSoup(f, 'html5lib')
+                # A Recursive Function that goes through HTML Document Tags and Text
+                parse_element(soup, folderNum, fileNum)
+                visitedDocuments += 1
+                counter += 1
+            else:
+                print("NOT VALID - Folder: " + folderNum +
+                      "    File: " + fileNum + "   URL: " + URL)
+                invalidDocuments += 1
         else:
-            print("NOT VALID - Folder: " + folderNum +
-                  "    File: " + fileNum + "   URL: " + URL)
-            invalidDocuments += 1
-        # else:
-        #     break
+            break
+
+# def build_index(file_directory, corpus_path):
+#     # Function that parses file_directory (bookingkeepings.json) to find path to HTML Document
+#     # Then calls functions to parse HTML Doc and go through its contents
+#     global visitedDocuments
+#     global invalidDocuments
+#     # counter = 0
+#     for key in file_directory:
+#         # if(counter < 20):
+#         folder_file_pair = key.split("/")
+#         folderNum = folder_file_pair[0]
+#         fileNum = folder_file_pair[1]
+#         URL = file_directory[key]
+#         if(is_valid(URL)):
+#             print("Folder: " + folderNum + "    File: " +
+#                   fileNum + "   URL: " + URL)
+#             f = open(os.path.join(corpus_path, folderNum,
+#                                   fileNum), 'r', encoding='utf8')
+#             soup = BeautifulSoup(f, 'html5lib')  # Parse Current HTML Document
+#             # A Recursive Function that goes through HTML Document Tags and Text
+#             parse_element(soup, folderNum, fileNum)
+#             visitedDocuments += 1
+#             # counter += 1
+#         else:
+#             print("NOT VALID - Folder: " + folderNum +
+#                   "    File: " + fileNum + "   URL: " + URL)
+#             invalidDocuments += 1
+#         # else:
+#         #     break
 
 
 def build_test(file_directory, corpus_path):
