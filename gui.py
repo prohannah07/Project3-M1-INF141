@@ -141,6 +141,15 @@ def get_url_description(posting):
         return ' '.join(text)[0:300].strip(" \n")
 
 
+def get_better_description(posting):
+    folder = posting.split("/")[0]
+    file = posting.split("/")[1]
+
+    f = open(os.path.join(sys.argv[1], folder, file), 'r', encoding='utf8')
+
+    soup = BeautifulSoup(f, 'lxml')
+
+
 # def delete_frame_labels():
 #     labels = []
 #     for label in bottomFrame.children.values():
