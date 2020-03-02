@@ -1,22 +1,22 @@
-NUMBER OF URLs RETRIEVED: 4353
+NUMBER OF URLs RETRIEVED: 13018
 FIRST 20 URLs:
-1	docID: 41/103	score: 0.5314812466624579	URL: fano.ics.uci.edu/cites/Organization/Univ-of-Athens-Dept-of-Informatics-and-Telecommunications.html
-2	docID: 48/18	score: 0.5189389598766287	URL: fano.ics.uci.edu/cites/Organization/Masaryk-Univ-Faculty-of-Informatics.html
-3	docID: 67/115	score: 0.5149514596051549	URL: fano.ics.uci.edu/cites/Location/Proc-10th-Genome-Informatics-Worksh.html
-4	docID: 71/3	score: 0.5072446712562471	URL: fano.ics.uci.edu/cites/Organization/Warsaw-Univ-Inst-of-Informatics.html
-5	docID: 50/498	score: 0.49630693823843264	URL: fano.ics.uci.edu/cites/Organization/Aristotle-Univ-of-Thessaloniki-Dept-of-Informatics.html
-6	docID: 39/287	score: 0.48939633419471834	URL: fano.ics.uci.edu/cites/Location/Proc-1st-Latin-American-Symp-Theoretical-Informatics-(LATIN-1992).html
-7	docID: 30/276	score: 0.4763991780971795	URL: fano.ics.uci.edu/cites/Location/Proc-6th-Int-Conf-Systemics-Cybernetics-and-Informatics-(SCI-2002).html
-8	docID: 72/94	score: 0.47027724653882913	URL: fano.ics.uci.edu/cites/Organization/Univ-of-Bergen-Dept-of-Informatics.html
-9	docID: 29/147	score: 0.4428547446716177	URL: www.ics.uci.edu/~kay/courses/i41/video
-10	docID: 72/416	score: 0.4416193294561932	URL: www.ics.uci.edu/~thornton/inf122/ProjectGuide
-11	docID: 30/369	score: 0.3960162118057298	URL: www.ics.uci.edu/~etrainer/theseus/personnel.html
-12	docID: 43/166	score: 0.38079290132743926	URL: www.ics.uci.edu/~celustig
-13	docID: 20/347	score: 0.36289943741953795	URL: www.ics.uci.edu/~nmangano/Nicolas_Mangano_%40_UCI/Info.html
-14	docID: 6/341	score: 0.32696856530368607	URL: www.ics.uci.edu/~taylor/classes/117/survey.html
-15	docID: 62/402	score: 0.31254606739324653	URL: www.ics.uci.edu/~dock/manuals/oechem/cplusprog/node5.html
-16	docID: 11/72	score: 0.29480305725547395	URL: www.ics.uci.edu/~thornton/inf43/MidtermScores.html
-17	docID: 67/407	score: 0.29169577041038486	URL: www.ics.uci.edu/~taylor/classes/117/integration-test.html
-18	docID: 52/427	score: 0.29142845327717404	URL: www.ics.uci.edu/~thornton/cs141/CodeExamples
-19	docID: 54/471	score: 0.28167384626999586	URL: www.ics.uci.edu/~andre/informatics291sf2015.html
-20	docID: 62/489	score: 0.2810309648647215	URL: www.ics.uci.edu/~andre/informatics291ss2016.html
+1	docID: 17/128	score: 0.6911877218886973	URL: www.ics.uci.edu/~dechter/courses/ics-171/fall-06
+2	docID: 68/490	score: 0.6454489664548505	URL: sli.ics.uci.edu/Classes/2009W?action=login
+3	docID: 39/280	score: 0.642501792308674	URL: www.ics.uci.edu/~dechter/courses/ics-171/spring-99
+4	docID: 63/197	score: 0.5700706027676219	URL: www.ics.uci.edu/~theory/269/090213.html
+5	docID: 47/124	score: 0.5547634609446698	URL: cml.ics.uci.edu/2014/08/2014_aaai
+6	docID: 13/120	score: 0.5440282234511635	URL: cml.ics.uci.edu/2010/07/2010_smythaaai
+7	docID: 0/212	score: 0.5406253694916823	URL: www.ics.uci.edu/~kobsa/courses/ICS104/course-notes/contr-disciplines.htm
+8	docID: 74/28	score: 0.5217383527524777	URL: www.ics.uci.edu/~theory/269/021206.html
+9	docID: 61/26	score: 0.47061296991110846	URL: frost.ics.uci.edu
+10	docID: 50/449	score: 0.4316844258482362	URL: mlearn.ics.uci.edu/databases/artificial-characters
+11	docID: 70/183	score: 0.42626813236620653	URL: www.ics.uci.edu/faculty/area/area_ai.php
+12	docID: 41/393	score: 0.42583976705927135	URL: www.ics.uci.edu/~minhaenl/class/2015/cs_171_fall/draft/results/results_vs_GoodAI_w9_h8_g0/Artificial_Unintelligence?C=M;O=A
+13	docID: 57/404	score: 0.42211021732459997	URL: www.ics.uci.edu/~pazzani
+14	docID: 39/149	score: 0.41872219533986965	URL: www.ics.uci.edu/~kkask
+15	docID: 5/26	score: 0.4098558003636346	URL: fano.ics.uci.edu/cites/Organization/Univ-Paris-8-Lab-dIntelligence-Artificielle.html
+16	docID: 51/239	score: 0.40891215046781293	URL: sli.ics.uci.edu/Classes/2009W
+17	docID: 27/385	score: 0.3884244168115119	URL: www.ics.uci.edu/~dechter/courses/ics-171/spring-98/ics171-sp98.html
+18	docID: 67/9	score: 0.3859725683875111	URL: cml.ics.uci.edu/2011/09/2011_wellingpami
+19	docID: 9/159	score: 0.38216557694457043	URL: sli.ics.uci.edu/Classes/2011S-271
+20	docID: 62/85	score: 0.38154936703134545	URL: fano.ics.uci.edu/cites/Location/IEEE-Trans-Pattern-Analysis-+-Machine-Intelligence.html
