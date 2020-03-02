@@ -14,6 +14,7 @@ import index
 
 corpus_path = ""
 index_file = ""
+q_file = ""
 # index = {}
 file_directory = {}
 retrieved_docIDs = []
@@ -40,6 +41,7 @@ def index_to_dict(index_path):
 def handle_query():
     global retrieved_docIDs
     global index_file
+    global q_file
     # index_file.seek(0)
 
     query = search_entry.get().lower()
@@ -57,12 +59,12 @@ def handle_query():
         # index_file.close()
     normalize_terms(query_terms, query_search, "Document_Reference.txt")
 
-    q = 'query.txt'
-    q_file = open(q, 'w')
+    # q = 'query.txt'
+    # q_file = open(q, 'w')
     print("Retrieved URLs")
     retrieved_docIDs = print_ranked_results(
         query_search, file_directory, q_file)
-    q_file.close()
+    # q_file.close()
 
     if query == "":
         print("TYPE SOMETHING!")
